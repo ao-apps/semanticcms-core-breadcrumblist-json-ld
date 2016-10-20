@@ -23,8 +23,6 @@
 package com.semanticcms.core.breadcrumblist.jsonld;
 
 import static com.aoindustries.encoding.TextInJavaScriptEncoder.encodeTextInJavaScript;
-import static com.aoindustries.encoding.TextInJavaScriptEncoder.textInJsonEncoder;
-import com.aoindustries.servlet.http.ServletUtil;
 import com.semanticcms.core.model.Book;
 import com.semanticcms.core.model.Page;
 import com.semanticcms.core.model.PageRef;
@@ -36,7 +34,6 @@ import com.semanticcms.core.servlet.SemanticCMS;
 import com.semanticcms.core.servlet.View;
 import java.io.IOException;
 import java.io.Writer;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -149,7 +146,6 @@ public class BreadcrumbListJsonLd implements Component {
 			// Other attempts, such as putting multiple into an array, gave confused results (but not errors) in the google validation tool.
 			for(List<Page> list : distinctLists) {
 				out.write("<script type=\"application/ld+json\">\n"
-					// This throws off yandex validator and is not necessary in this limited context: + "// <![CDATA[\n"
 					+ "{\n"
 					+ "  \"@context\": \"http://schema.org\",\n"
 					+ "  \"@type\": \"BreadcrumbList\",\n"
@@ -168,16 +164,7 @@ public class BreadcrumbListJsonLd implements Component {
 					out.write(",\n"
 						+ "    \"item\": {\n"
 						+ "      \"@id\": \"");
-					String servletPath = item.getPageRef().getServletPath();
-					if(!view.isDefault()) {
-						servletPath += "?view=" + URLEncoder.encode(view.getName(), response.getCharacterEncoding());
-					}
-					ServletUtil.getAbsoluteURL(
-						request,
-						response.encodeURL(servletPath),
-						textInJsonEncoder,
-						out
-					);
+					encodeTextInJavaScript(view.getCanonicalUrl(servletContext, request, response, item), out);
 					out.write("\",\n"
 						+ "      \"name\": \"");
 					// The parent used for shortTitle resolution, if any
@@ -201,7 +188,6 @@ public class BreadcrumbListJsonLd implements Component {
 				}
 				out.write("]\n"
 					+ "}\n"
-					// This throws off yandex validator and is not necessary in this limited context: + "// ]]>\n"
 					+ "</script>");
 			}
 		}
