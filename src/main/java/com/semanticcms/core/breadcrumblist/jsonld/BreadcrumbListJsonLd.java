@@ -238,7 +238,7 @@ public class BreadcrumbListJsonLd implements Component {
 				);
 			}
 		} else {
-			if(!distinctLists.contains(currentList)) {
+			if(!currentList.isEmpty() && !distinctLists.contains(currentList)) {
 				// Add copy, since currentList will continue to be altered during traversal
 				distinctLists.add(new ArrayList<Page>(currentList));
 			}
