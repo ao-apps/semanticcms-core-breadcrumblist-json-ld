@@ -112,6 +112,7 @@ import javax.servlet.http.HttpServletResponse;
  *   <li><a href="https://developers.google.com/search/docs/data-types/breadcrumbs">Google Search - Breadcrumbs</a></li>
  *   <li><a href="https://search.google.com/structured-data/testing-tool">Google Structure Data Testing Tool</a></li>
  *   <li><a href="https://audisto.com/insights/guides/2/">Breadcrumb Navigation Guide - Usability &amp; SEOM</a></li>
+ *   <li><a href="https://webmaster.yandex.com/tools/microtest/">Yandex validator</a></li>
  * </ul>
  */
 public class BreadcrumbListJsonLd implements Component {
@@ -148,7 +149,7 @@ public class BreadcrumbListJsonLd implements Component {
 			// Other attempts, such as putting multiple into an array, gave confused results (but not errors) in the google validation tool.
 			for(List<Page> list : distinctLists) {
 				out.write("<script type=\"application/ld+json\">\n"
-					+ "// <![CDATA[\n"
+					// This throws off yandex validator and is not necessary in this limited context: + "// <![CDATA[\n"
 					+ "{\n"
 					+ "  \"@context\": \"http://schema.org\",\n"
 					+ "  \"@type\": \"BreadcrumbList\",\n"
@@ -200,7 +201,7 @@ public class BreadcrumbListJsonLd implements Component {
 				}
 				out.write("]\n"
 					+ "}\n"
-					+ "// ]]>\n"
+					// This throws off yandex validator and is not necessary in this limited context: + "// ]]>\n"
 					+ "</script>");
 			}
 		}
