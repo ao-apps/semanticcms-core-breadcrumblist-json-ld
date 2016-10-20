@@ -94,7 +94,6 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 									<link>https://docs.oracle.com/javase/6/docs/api/</link>
 									<link>https://docs.oracle.com/javaee/6/api/</link>
 									<link>https://www.aoindustries.com/ao-encoding/apidocs/</link>
-									<link>https://www.aoindustries.com/aocode-public/apidocs/</link>
 									<link>https://semanticcms.com/core/model/apidocs/</link>
 									<link>https://semanticcms.com/core/servlet/apidocs/</link>
 								</links>
@@ -117,11 +116,6 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 			<groupId>com.aoindustries</groupId>
 			<artifactId>ao-encoding</artifactId>
 			<version>1.5.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.aoindustries</groupId>
-			<artifactId>aocode-public</artifactId>
-			<version>1.8.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.semanticcms</groupId>
