@@ -72,7 +72,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 		<ul>
 			<li><a target="_top" href="https://semanticcms.com/core/breadcrumblist-json-ld/">Project Home</a></li>
 			<li><a target="_top" href="https://semanticcms.com/core/breadcrumblist-json-ld/apidocs/">API Docs</a></li>
-			<li><a target="_top" href="https://search.maven.org/#search|gav|1|g:%22com.semanticcms%22%20AND%20a:%22semanticcms-core-breadcrumblist-json-ld%22">Maven Central Repository</a></li>
+			<li><a target="_top" href="https://search.maven.org/#search%7Cgav%7C1%7Cg:%22com.semanticcms%22%20AND%20a:%22semanticcms-core-breadcrumblist-json-ld%22">Maven Central Repository</a></li>
 			<li><a target="_top" href="https://github.com/aoindustries/semanticcms-core-breadcrumblist-json-ld">GitHub</a></li>
 		</ul>
 	</div>

@@ -4,7 +4,7 @@
 ## Project Links
 * [Project Home](https://semanticcms.com/core/breadcrumblist-json-ld/)
 * [API Docs](https://semanticcms.com/core/breadcrumblist-json-ld/apidocs/)
-* [Maven Central Repository](https://search.maven.org/#search|gav|1|g:%22com.semanticcms%22%20AND%20a:%22semanticcms-core-breadcrumblist-json-ld%22)
+* [Maven Central Repository](https://search.maven.org/#search%7Cgav%7C1%7Cg:%22com.semanticcms%22%20AND%20a:%22semanticcms-core-breadcrumblist-json-ld%22)
 * [GitHub](https://github.com/aoindustries/semanticcms-core-breadcrumblist-json-ld)
 
 ## Contact Us
