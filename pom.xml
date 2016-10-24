@@ -38,9 +38,6 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 	<properties>
 		<bookPath>/core/breadcrumblist-json-ld</bookPath>
 		<shortTitle>BreadcrumbList JSON-LD</shortTitle>
-		<javadoc.breadcrumbs><![CDATA[<a target="_top" href="${project.parent.parent.url}">${project.parent.parent.name}</a>
-/ <a target="_top" href="${project.parent.url}">Core</a>
-/ <a target="_top" href="${project.url}">${shortTitle}</a>]]></javadoc.breadcrumbs>
 		<description.html><![CDATA[<a target="_top" href="https://schema.org/BreadcrumbList">BreadcrumbList</a> for <a target="_top" href="https://semanticcms.com/">SemanticCMS</a> in <a target="_top" href="http://json-ld.org/">JSON-LD</a> format.]]></description.html>
 	</properties>
 
