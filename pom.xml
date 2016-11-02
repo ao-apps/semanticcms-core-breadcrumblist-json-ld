@@ -98,7 +98,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 		<dependency>
 			<groupId>com.semanticcms</groupId>
 			<artifactId>semanticcms-core-servlet</artifactId>
-			<version>1.9.1-SNAPSHOT</version>
+			<version>1.10.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
