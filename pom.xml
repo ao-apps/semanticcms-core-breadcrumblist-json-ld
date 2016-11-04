@@ -66,7 +66,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 							<configuration>
 								<links>
 									<link>https://docs.oracle.com/javaee/6/api/</link>
-									<link>https://www.aoindustries.com/ao-encoding/apidocs/</link>
+									<link>https://aoindustries.com/ao-encoding/apidocs/</link>
 									<link>https://semanticcms.com/core/model/apidocs/</link>
 									<link>https://semanticcms.com/core/servlet/apidocs/</link>
 								</links>
