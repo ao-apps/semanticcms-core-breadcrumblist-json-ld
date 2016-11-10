@@ -36,13 +36,12 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 	<packaging>jar</packaging>
 
 	<properties>
-		<bookPath>/core/breadcrumblist-json-ld</bookPath>
 		<shortTitle>BreadcrumbList JSON-LD</shortTitle>
 		<description.html><![CDATA[<a target="_top" href="https://schema.org/BreadcrumbList">BreadcrumbList</a> for <a target="_top" href="https://semanticcms.com/">SemanticCMS</a> in <a target="_top" href="http://json-ld.org/">JSON-LD</a> format.]]></description.html>
 	</properties>
 
 	<name>SemanticCMS Core BreadcrumbList JSON-LD</name>
-	<url>https://semanticcms.com${bookPath}/</url><!-- Can't inherit due to multi-module -->
+	<url>https://semanticcms.com/core/breadcrumblist-json-ld/</url>
 	<description>BreadcrumbList for SemanticCMS in JSON-LD format.</description>
 	<inceptionYear>2016</inceptionYear>
 
