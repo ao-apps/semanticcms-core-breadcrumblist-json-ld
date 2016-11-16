@@ -91,17 +91,17 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 		<dependency>
 			<groupId>com.aoindustries</groupId>
 			<artifactId>ao-encoding</artifactId>
-			<version>1.5.1-SNAPSHOT</version>
+			<version>1.5.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.semanticcms</groupId>
 			<artifactId>semanticcms-core-model</artifactId>
-			<version>1.8.1-SNAPSHOT</version>
+			<version>1.8.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.semanticcms</groupId>
 			<artifactId>semanticcms-core-servlet</artifactId>
-			<version>1.10.0-SNAPSHOT</version>
+			<version>1.10.0</version>
 		</dependency>
 	</dependencies>
 </project>
