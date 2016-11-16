@@ -36,7 +36,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-30T16:32:29-0500"
-		dateModified="2016-11-13T21:10:46-0600"
+		dateModified="2016-11-15T20:47:49-0600"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.semanticcms:semanticcms-core-breadcrumblist-json-ld:pom.version}" />
@@ -51,14 +51,23 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 				groupId="@{documented.groupId}"
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{documented.scm.url}"
-			>
-				<ul>
-					<li>New <ao:a href="https://aoindustries.com/ao-oss-parent/">AO OSS Parent</ao:a> POM to simplify <code>pom.xml</code> files.</li>
-					<li>Project documentation moved to per-project book in <core:link book="/" page="/index.jspx" /> format.</li>
-					<li>Added changelog as top-level project link.</li>
-				</ul>
-			</changelog:release>
+			/>
 		</c:if>
+
+		<changelog:release
+			projectName="@{documented.name}"
+			version="1.0.1"
+			datePublished="2016-11-15T20:47:49-0600"
+			groupId="@{documented.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{documented.scm.url}"
+		>
+			<ul>
+				<li>New <ao:a href="https://aoindustries.com/ao-oss-parent/">AO OSS Parent</ao:a> POM to simplify <code>pom.xml</code> files.</li>
+				<li>Project documentation moved to per-project book in <core:link book="/" page="/index.jspx" /> format.</li>
+				<li>Added changelog as top-level project link.</li>
+			</ul>
+		</changelog:release>
 
 		<changelog:release
 			projectName="@{documented.name}"
