@@ -68,6 +68,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 							<artifactId>maven-javadoc-plugin</artifactId>
 							<configuration>
 								<links>
+									<link>${javac.link.javaApi}</link>
 									<link>${javac.link.javaeeApi.6}</link>
 									<link>https://aoindustries.com/ao-encoding/apidocs/</link>
 									<link>https://semanticcms.com/core/model/apidocs/</link>
