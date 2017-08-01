@@ -1,6 +1,6 @@
 /*
  * semanticcms-core-breadcrumblist-json-ld - BreadcrumbList for SemanticCMS in JSON-LD format.
- * Copyright (C) 2016  AO Industries, Inc.
+ * Copyright (C) 2016, 2017  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,10 +23,10 @@
 package com.semanticcms.core.breadcrumblist.jsonld;
 
 import static com.aoindustries.encoding.TextInJavaScriptEncoder.encodeTextInJavaScript;
-import com.semanticcms.core.model.Book;
 import com.semanticcms.core.model.Page;
 import com.semanticcms.core.model.PageRef;
 import com.semanticcms.core.model.ParentRef;
+import com.semanticcms.core.repository.Book;
 import com.semanticcms.core.servlet.Component;
 import com.semanticcms.core.servlet.ComponentPosition;
 import com.semanticcms.core.servlet.PageUtils;
