@@ -26,7 +26,7 @@ import static com.aoindustries.encoding.TextInJavaScriptEncoder.encodeTextInJava
 import com.semanticcms.core.model.Page;
 import com.semanticcms.core.model.PageRef;
 import com.semanticcms.core.model.ParentRef;
-import com.semanticcms.core.pages.Book;
+import com.semanticcms.core.servlet.Book;
 import com.semanticcms.core.servlet.Component;
 import com.semanticcms.core.servlet.ComponentPosition;
 import com.semanticcms.core.servlet.PageUtils;
