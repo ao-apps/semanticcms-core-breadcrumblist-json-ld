@@ -54,7 +54,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 				scmUrl="@{documented.scm.url}"
 			>
 				<ul>
-					<li>Added <core:page book="/core/pages" page="/index.jspx" /> support.</li>
+					<li>Added <core:page book="/core/pages" page="/" /> support.</li>
 				</ul>
 			</changelog:release>
 		</c:if>
@@ -83,7 +83,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 		>
 			<ul>
 				<li>New <ao:a href="https://aoindustries.com/ao-oss-parent/">AO OSS Parent</ao:a> POM to simplify <code>pom.xml</code> files.</li>
-				<li>Project documentation moved to per-project book in <core:link book="/" page="/index.jspx" /> format.</li>
+				<li>Project documentation moved to per-project book in <core:link book="/" page="/" /> format.</li>
 				<li>Added changelog as top-level project link.</li>
 			</ul>
 		</changelog:release>
