@@ -23,15 +23,15 @@
 package com.semanticcms.core.breadcrumblist.jsonld;
 
 import static com.aoindustries.encoding.TextInJavaScriptEncoder.encodeTextInJavaScript;
+import com.semanticcms.core.controller.PageUtils;
+import com.semanticcms.core.controller.SemanticCMS;
 import com.semanticcms.core.model.Page;
 import com.semanticcms.core.model.PageRef;
 import com.semanticcms.core.model.ParentRef;
-import com.semanticcms.core.servlet.Book;
-import com.semanticcms.core.servlet.Component;
-import com.semanticcms.core.servlet.ComponentPosition;
-import com.semanticcms.core.servlet.PageUtils;
-import com.semanticcms.core.servlet.SemanticCMS;
-import com.semanticcms.core.servlet.View;
+import com.semanticcms.core.renderer.html.Component;
+import com.semanticcms.core.renderer.html.ComponentPosition;
+import com.semanticcms.core.renderer.html.HtmlRendererUtils;
+import com.semanticcms.core.renderer.html.View;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -173,7 +173,7 @@ public class BreadcrumbListJsonLd implements Component {
 						parentPageRef = list.get(i + 1).getPageRef();
 					} else {
 						// If there is one, and only one, parent that is applicable to the given view, use it as shortTitle context
-						Set<Page> applicableParents = PageUtils.getApplicableParents(servletContext, request, response, view, item);
+						Set<Page> applicableParents = HtmlRendererUtils.getApplicableParents(servletContext, request, response, view, item);
 						if(applicableParents.size() == 1) {
 							parentPageRef = applicableParents.iterator().next().getPageRef();
 						} else {
@@ -208,7 +208,7 @@ public class BreadcrumbListJsonLd implements Component {
 		boolean isContentRoot = currentPage.getPageRef().equals(contentRoot);
 		if(!isContentRoot) currentList.add(currentPage);
 		// Find all parents that are not in missing books and apply to the current view
-		Set<Page> applicableParents = PageUtils.getApplicableParents(servletContext, request, response, view, currentPage);
+		Set<Page> applicableParents = HtmlRendererUtils.getApplicableParents(servletContext, request, response, view, currentPage);
 		if(!applicableParents.isEmpty()) {
 			// Recurse further, still not at leaf
 			for(Page parent : applicableParents) {
