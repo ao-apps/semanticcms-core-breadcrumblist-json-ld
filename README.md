@@ -1,4 +1,4 @@
-# [<img src="ao-logo.png" alt="AO Logo" width="35" height="40">](https://aoindustries.com/) [SemanticCMS](https://semanticcms.com/) / [Core](https://semanticcms.com/core/) / [BreadcrumbList JSON-LD](https://semanticcms.com/core/breadcrumblist-json-ld/)
+# [<img src="ao-logo.png" alt="AO Logo" width="35" height="40">](https://github.com/aoindustries) [SemanticCMS](https://github.com/aoindustries/semanticcms) / [Core](https://github.com/aoindustries/semanticcms-core) / [BreadcrumbList JSON-LD](https://github.com/aoindustries/semanticcms-core-breadcrumblist-json-ld)
 <p>
 	<a href="https://aoindustries.com/life-cycle#project-current-stable">
 		<img src="https://semanticcms.com/ao-badges/project-current-stable.svg" alt="project: current stable" />
@@ -24,7 +24,7 @@
 	</a>
 </p>
 
-[BreadcrumbList](https://schema.org/BreadcrumbList) for [SemanticCMS](https://semanticcms.com/) in [JSON-LD](http://json-ld.org/) format.
+[BreadcrumbList](https://schema.org/BreadcrumbList) for [SemanticCMS](https://github.com/aoindustries/semanticcms) in [JSON-LD](http://json-ld.org/) format.
 
 ## Project Links
 * [Project Home](https://semanticcms.com/core/breadcrumblist-json-ld/)
