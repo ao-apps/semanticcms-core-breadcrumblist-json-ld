@@ -30,7 +30,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 	</parent>
 
 	<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-breadcrumblist-json-ld-book</artifactId><version>1.0.3-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>bundle</packaging>
 
 	<properties>
 		<!-- These values are copied from the project being documented -->
