@@ -37,7 +37,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 		<documented.groupId>com.semanticcms</documented.groupId><documented.artifactId>semanticcms-core-breadcrumblist-json-ld</documented.artifactId>
 		<documented.javaVersion>1.7</documented.javaVersion>
 		<documented.javac.link.javaApi>${javac.link.javaApi.jdk7}</documented.javac.link.javaApi>
-		<documented.name>SemanticCMS 1 Core BreadcrumbList JSON-LD</documented.name>
+		<documented.name>SemanticCMS Core BreadcrumbList JSON-LD</documented.name>
 		<documented.shortTitle>BreadcrumbList JSON-LD</documented.shortTitle>
 		<documented.url>https://semanticcms.com/core/breadcrumblist-json-ld/</documented.url>
 		<documented.description>BreadcrumbList for SemanticCMS in JSON-LD format.</documented.description>
