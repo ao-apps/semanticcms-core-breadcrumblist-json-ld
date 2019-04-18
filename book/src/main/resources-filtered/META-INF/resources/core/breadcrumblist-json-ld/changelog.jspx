@@ -37,7 +37,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-30T16:32:29-0500"
-		dateModified="2019-04-18T08:07:34-0500"
+		dateModified="2019-04-18T08:22:39-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.semanticcms:semanticcms-core-breadcrumblist-json-ld:pom.version}" />
@@ -55,6 +55,18 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 			>
 				<ul>
 					<li>Minimum Java version changed from 1.6 to 1.7.</li>
+					<li>
+						<p>
+							Google search results seem confused by multiple <code><ao:a href="https://schema.org/BreadcrumbList">BreadcrumbList</ao:a></code>.
+							Added new <ao:a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">init parameter</ao:a>
+							<code>com.semanticcms.core.breadcrumblist.jsonld.BreadcrumbListJsonLd.firstListOnly</code>,
+							which will default to <code>true</code> until <ao:a href="https://search.google.com/structured-data/testing-tool">Google supports multiple breadcrumb lists</ao:a>.
+						</p>
+						<p>
+							When enabled, only the first <code><ao:a href="https://schema.org/BreadcrumbList">BreadcrumbList</ao:a></code> is provided.
+							The element considered first depends on the page parent/child relationship ordering.
+						</p>
+					</li>
 					<li>Added <core:page book="/core/pages" page="/" /> support.</li>
 				</ul>
 			</changelog:release>

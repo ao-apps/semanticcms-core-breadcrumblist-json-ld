@@ -1,6 +1,6 @@
 /*
  * semanticcms-core-breadcrumblist-json-ld - BreadcrumbList for SemanticCMS in JSON-LD format.
- * Copyright (C) 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -23,6 +23,7 @@
 package com.semanticcms.core.breadcrumblist.jsonld;
 
 import com.semanticcms.core.renderer.html.HtmlRenderer;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -32,7 +33,10 @@ public class BreadcrumbListJsonLdContextListener implements ServletContextListen
 
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
-		HtmlRenderer.getInstance(event.getServletContext()).addComponent(new BreadcrumbListJsonLd());
+		ServletContext servletContext = event.getServletContext();
+		// Defaults to true until Google is known to support multiple lists
+		boolean firstListOnly = !"false".equalsIgnoreCase(servletContext.getInitParameter(BreadcrumbListJsonLd.FIRST_LIST_ONLY_INIT_PARAM));
+		HtmlRenderer.getInstance(event.getServletContext()).addComponent(new BreadcrumbListJsonLd(firstListOnly));
 	}
 
 	@Override

@@ -114,6 +114,26 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class BreadcrumbListJsonLd implements Component {
 
+	/**
+	 * Google search results seem confused by multiple <code><a href="https://schema.org/BreadcrumbList">BreadcrumbList</a></code>.
+	 * <p>
+	 * This is still true as of 2019-04-18.  Setting this to {@code true} will only
+	 * provide the first of the breadcrumb lists.  Thus the page parent/child relationship
+	 * ordering will select which of the possible breadcrumb lists is provided.
+	 * </p>
+	 * <p>
+	 * This defaults to {@code true}, and will continue to do so until Google correctly
+	 * interprets multiple breadcrumb list entries.
+	 * </p>
+	 */
+	public static final String FIRST_LIST_ONLY_INIT_PARAM = BreadcrumbListJsonLd.class.getName() + ".firstListOnly";
+
+	private final boolean firstListOnly;
+
+	public BreadcrumbListJsonLd(boolean firstListOnly) {
+		this.firstListOnly = firstListOnly;
+	}
+
 	@Override
 	public void doComponent(
 		ServletContext servletContext,
@@ -189,6 +209,7 @@ public class BreadcrumbListJsonLd implements Component {
 				out.write("]\n"
 					+ "}\n"
 					+ "</script>");
+				if(firstListOnly) break;
 			}
 		}
 	}
