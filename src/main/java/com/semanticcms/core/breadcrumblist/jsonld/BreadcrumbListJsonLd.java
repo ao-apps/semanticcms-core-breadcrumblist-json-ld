@@ -1,6 +1,6 @@
 /*
  * semanticcms-core-breadcrumblist-json-ld - BreadcrumbList for SemanticCMS in JSON-LD format.
- * Copyright (C) 2016, 2017  AO Industries, Inc.
+ * Copyright (C) 2016, 2017, 2019  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -131,7 +131,7 @@ public class BreadcrumbListJsonLd implements Component {
 		) {
 			PageRef contentRoot = SemanticCMS.getInstance(servletContext).getRootBook().getContentRoot();
 			// Find each distinct list, these will be in reverse order as a consequence of the traversal
-			Set<List<Page>> distinctLists = new LinkedHashSet<List<Page>>();
+			Set<List<Page>> distinctLists = new LinkedHashSet<>();
 			findDistinctListsRecursive(
 				servletContext,
 				request,
@@ -226,7 +226,7 @@ public class BreadcrumbListJsonLd implements Component {
 		} else {
 			if(!currentList.isEmpty() && !distinctLists.contains(currentList)) {
 				// Add copy, since currentList will continue to be altered during traversal
-				distinctLists.add(new ArrayList<Page>(currentList));
+				distinctLists.add(new ArrayList<>(currentList));
 			}
 		}
 		if(!isContentRoot) currentList.remove(currentList.size() - 1);
