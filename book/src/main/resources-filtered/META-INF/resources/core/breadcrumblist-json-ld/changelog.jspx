@@ -37,7 +37,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-30T16:32:29-0500"
-		dateModified="2017-07-20T12:00:05-0500"
+		dateModified="2019-04-18T08:07:34-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.semanticcms:semanticcms-core-breadcrumblist-json-ld:pom.version}" />
@@ -52,7 +52,11 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 				groupId="@{documented.groupId}"
 				artifactId="@{documented.artifactId}"
 				scmUrl="@{documented.scm.url}"
-			/>
+			>
+				<ul>
+					<li>Minimum Java version changed from 1.6 to 1.7.</li>
+				</ul>
+			</changelog:release>
 		</c:if>
 
 		<changelog:release
