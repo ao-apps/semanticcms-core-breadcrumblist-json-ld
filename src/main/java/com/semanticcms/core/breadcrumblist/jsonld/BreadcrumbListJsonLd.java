@@ -153,6 +153,7 @@ public class BreadcrumbListJsonLd implements Component {
 			// Find each distinct list, these will be in reverse order as a consequence of the traversal
 			Set<List<Page>> distinctLists = new LinkedHashSet<>();
 			findDistinctListsRecursive(
+				firstListOnly,
 				servletContext,
 				request,
 				response,
@@ -209,13 +210,13 @@ public class BreadcrumbListJsonLd implements Component {
 				out.write("]\n"
 					+ "}\n"
 					+ "</script>");
-				if(firstListOnly) break;
 			}
 		}
 	}
 
 
 	private static void findDistinctListsRecursive(
+		boolean firstListOnly,
 		ServletContext servletContext,
 		HttpServletRequest request,
 		HttpServletResponse response,
@@ -234,6 +235,7 @@ public class BreadcrumbListJsonLd implements Component {
 			// Recurse further, still not at leaf
 			for(Page parent : applicableParents) {
 				findDistinctListsRecursive(
+					firstListOnly,
 					servletContext,
 					request,
 					response,
@@ -243,6 +245,7 @@ public class BreadcrumbListJsonLd implements Component {
 					currentList,
 					parent
 				);
+				if(firstListOnly && !distinctLists.isEmpty()) break;
 			}
 		} else {
 			if(!currentList.isEmpty() && !distinctLists.contains(currentList)) {
