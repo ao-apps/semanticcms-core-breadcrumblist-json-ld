@@ -25,11 +25,11 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.semanticcms</groupId><artifactId>semanticcms-parent</artifactId><version>1.1.1-validation-SNAPSHOT</version>
+		<groupId>com.semanticcms</groupId><artifactId>semanticcms-parent</artifactId><version>1.1.0-validation-SNAPSHOT</version>
 		<relativePath>../../parent/pom.xml</relativePath>
 	</parent>
 
-	<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-breadcrumblist-json-ld</artifactId><version>1.1.1-validation-SNAPSHOT</version>
+	<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-breadcrumblist-json-ld</artifactId><version>1.1.0-validation-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 
 	<properties>
@@ -81,13 +81,13 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.aoindustries</groupId><artifactId>ao-encoding</artifactId><version>1.7.1-validation-SNAPSHOT</version>
+			<groupId>com.aoindustries</groupId><artifactId>ao-encoding</artifactId><version>1.7.0-validation-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-model</artifactId><version>1.9.1-validation-SNAPSHOT</version>
+			<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-model</artifactId><version>1.9.0-validation-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-servlet</artifactId><version>1.12.1-validation-SNAPSHOT</version>
+			<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-servlet</artifactId><version>1.12.0-validation-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
