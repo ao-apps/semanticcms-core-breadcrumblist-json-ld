@@ -42,13 +42,13 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 		<header>
 			<ao:include
 				page="/ao-badges/badges.inc.jspx"
-				arg.projectStatus="${currentPage.property.projectStatus}"
-				arg.managementStatus="${currentPage.property.managementStatus}"
-				arg.packagingStatus="${currentPage.property.packagingStatus}"
-				arg.javaVersion="${currentPage.property.javaVersion}"
-				arg.javaeeVersion="${currentPage.property.javaeeVersion}"
-				arg.semanticVersioning="${currentPage.property.semanticVersioning}"
-				arg.license="${currentPage.property.license}"
+				arg.projectStatus="current-stable"
+				arg.managementStatus="production"
+				arg.packagingStatus="active"
+				arg.javaVersion="@{documented.javaVersion}"
+				arg.javaeeVersion="6"
+				arg.semanticVersioning="2.0.0"
+				arg.license="lgpl-3.0"
 			/>
 		</header>
 		<news:news pubDate="2016-10-19T23:41:28-0500">
