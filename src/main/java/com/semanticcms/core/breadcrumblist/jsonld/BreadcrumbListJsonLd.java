@@ -22,7 +22,11 @@
  */
 package com.semanticcms.core.breadcrumblist.jsonld;
 
+import static com.aoindustries.encoding.JavaScriptInXhtmlEncoder.ldJsonInXhtmlEncoder;
+import com.aoindustries.encoding.MediaWriter;
 import static com.aoindustries.encoding.TextInJavaScriptEncoder.encodeTextInJavaScript;
+import static com.aoindustries.encoding.TextInJavaScriptEncoder.textInLdJsonEncoder;
+import com.aoindustries.net.URIEncoder;
 import com.semanticcms.core.model.Book;
 import com.semanticcms.core.model.Page;
 import com.semanticcms.core.model.PageRef;
@@ -166,8 +170,10 @@ public class BreadcrumbListJsonLd implements Component {
 			// Hard to find it documented, but it seems that multiple breadcrumbs in JSON-LD are represented by multiple script blocks.
 			// Other attempts, such as putting multiple into an array, gave confused results (but not errors) in the google validation tool.
 			for(List<Page> list : distinctLists) {
-				out.write("<script type=\"application/ld+json\">\n"
-					+ "{\n"
+				// This JSON-LD is embedded in the XHTML page, use encoder
+				ldJsonInXhtmlEncoder.writePrefixTo(out);
+				MediaWriter jsonOut = new MediaWriter(ldJsonInXhtmlEncoder, out);
+				jsonOut.write("{\n"
 					+ "  \"@context\": \"http://schema.org\",\n"
 					+ "  \"@type\": \"BreadcrumbList\",\n"
 					+ "  \"itemListElement\": [");
@@ -178,15 +184,20 @@ public class BreadcrumbListJsonLd implements Component {
 					i--
 				) {
 					Page item = list.get(i);
-					out.write("{\n"
+					jsonOut.write("{\n"
 						+ "    \"@type\": \"ListItem\",\n"
 						+ "    \"position\": ");
-					out.write(Integer.toString(size - i));
-					out.write(",\n"
+					jsonOut.write(Integer.toString(size - i));
+					jsonOut.write(",\n"
 						+ "    \"item\": {\n"
 						+ "      \"@id\": \"");
-					encodeTextInJavaScript(view.getCanonicalUrl(servletContext, request, response, item), out);
-					out.write("\",\n"
+					// Write US-ASCII always
+					URIEncoder.encodeURI(
+						view.getCanonicalUrl(servletContext, request, response, item),
+						textInLdJsonEncoder,
+						jsonOut
+					);
+					jsonOut.write("\",\n"
 						+ "      \"name\": \"");
 					// The parent used for shortTitle resolution, if any
 					PageRef parentPageRef;
@@ -201,15 +212,15 @@ public class BreadcrumbListJsonLd implements Component {
 							parentPageRef = null;
 						}
 					}
-					encodeTextInJavaScript(PageUtils.getShortTitle(parentPageRef, item), out);
-					out.write("\"\n"
+					encodeTextInJavaScript(PageUtils.getShortTitle(parentPageRef, item), jsonOut);
+					jsonOut.write("\"\n"
 						+ "    }\n"
 						+ "  }");
-					if(i != 0) out.write(',');
+					if(i != 0) jsonOut.write(',');
 				}
-				out.write("]\n"
-					+ "}\n"
-					+ "</script>");
+				jsonOut.write("]\n"
+					+ "}\n");
+				ldJsonInXhtmlEncoder.writeSuffixTo(out);
 			}
 		}
 	}

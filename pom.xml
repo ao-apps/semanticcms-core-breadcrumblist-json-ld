@@ -29,7 +29,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 		<relativePath>../../parent/pom.xml</relativePath>
 	</parent>
 
-	<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-breadcrumblist-json-ld</artifactId><version>1.1.1-POST-SNAPSHOT</version>
+	<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-breadcrumblist-json-ld</artifactId><version>1.2.0-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 
 	<properties>
@@ -67,6 +67,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 								<link>${javac.link.javaeeApi.6}</link>
 								<!-- Direct -->
 								<link>https://aoindustries.com/ao-encoding/apidocs/</link>
+								<link>https://aoindustries.com/ao-net-types/apidocs/</link>
 								<link>https://semanticcms.com/core/model/apidocs/</link>
 								<link>https://semanticcms.com/core/servlet/apidocs/</link>
 							</links>
@@ -90,6 +91,9 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 				<groupId>com.aoindustries</groupId><artifactId>ao-encoding</artifactId><version>2.0.0-POST-SNAPSHOT</version>
 			</dependency>
 			<dependency>
+				<groupId>com.aoindustries</groupId><artifactId>ao-net-types</artifactId><version>1.2.0-POST-SNAPSHOT</version>
+			</dependency>
+			<dependency>
 				<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-model</artifactId><version>1.10.0-POST-SNAPSHOT</version>
 			</dependency>
 			<dependency>
@@ -107,6 +111,9 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 		<!-- Direct -->
 		<dependency>
 			<groupId>com.aoindustries</groupId><artifactId>ao-encoding</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.aoindustries</groupId><artifactId>ao-net-types</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-model</artifactId>
