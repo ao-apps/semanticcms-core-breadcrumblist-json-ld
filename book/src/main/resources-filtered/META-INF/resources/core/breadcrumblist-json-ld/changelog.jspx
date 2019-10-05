@@ -36,7 +36,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-30T16:32:29-0500"
-		dateModified="2019-10-04T23:08:05-0500"
+		dateModified="2019-10-04T23:25:38-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.semanticcms:semanticcms-core-breadcrumblist-json-ld:pom.version}" />
@@ -61,7 +61,8 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 					</li>
 					<li>
 						Absolute URLs are now generated in <ao:a href="https://tools.ietf.org/html/rfc3986">RFC 3986 URI</ao:a> US-ASCII
-						format, even when the context path has Unicode characters.  This is consistent with
+						format always, even when <ao:a href="https://tools.ietf.org/html/rfc3987">RFC 3987 IRI</ao:a> Unicode format is active
+						on the page.  This is consistent with
 						<ao:a href="https://www.w3.org/TR/microdata/#terminology">HTML Microdata - Terminology</ao:a>:
 						<blockquote>
 							For the purposes of this specification, the terms "URL" and "URI" are equivalent. The URL specification,
