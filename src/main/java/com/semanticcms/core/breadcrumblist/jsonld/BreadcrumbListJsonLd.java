@@ -191,7 +191,7 @@ public class BreadcrumbListJsonLd implements Component {
 					jsonOut.write(",\n"
 						+ "    \"item\": {\n"
 						+ "      \"@id\": \"");
-					// Write US-ASCII always
+					// Write US-ASCII always per https://www.w3.org/TR/microdata/#terminology
 					URIEncoder.encodeURI(
 						view.getCanonicalUrl(servletContext, request, response, item),
 						textInLdJsonEncoder,
