@@ -36,7 +36,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-30T16:32:29-0500"
-		dateModified="2019-10-04T23:25:38-0500"
+		dateModified="2019-10-11T19:51:01-0500"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.semanticcms:semanticcms-core-breadcrumblist-json-ld:pom.version}" />
@@ -54,25 +54,37 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 			>
 				<ul>
 					<li>Added <core:page book="/core/pages" page="/" /> support.</li>
-					<li>
-						This JSON-LD is embedded in the XHTML page, using
-						<ao:a href="https://aoindustries.com/ao-encoding/apidocs/com/aoindustries/encoding/JavaScriptInXhtmlEncoder.html#ldJsonInXhtmlEncoder">JavaScriptInXhtmlEncoder.ldJsonInXhtmlEncoder</ao:a>
-						encoder.
-					</li>
-					<li>
-						Absolute URLs are now generated in <ao:a href="https://tools.ietf.org/html/rfc3986">RFC 3986 URI</ao:a> US-ASCII
-						format always, even when <ao:a href="https://tools.ietf.org/html/rfc3987">RFC 3987 IRI</ao:a> Unicode format is active
-						on the page.  This is consistent with
-						<ao:a href="https://www.w3.org/TR/microdata/#terminology">HTML Microdata - Terminology</ao:a>:
-						<blockquote>
-							For the purposes of this specification, the terms "URL" and "URI" are equivalent. The URL specification,
-							and <ao:a href="https://tools.ietf.org/html/rfc3986">RFC 3986</ao:a> which uses the term URI, define a
-							<dfn>URL</dfn>, <dfn>valid URL</dfn>, and <dfn>absolute URL</dfn>.
-						</blockquote>
-					</li>
 				</ul>
 			</changelog:release>
 		</c:if>
+
+		<changelog:release
+			projectName="@{documented.name}"
+			version="1.2.0"
+			datePublished="2019-10-11T19:51:01-0500"
+			groupId="@{documented.groupId}"
+			artifactId="@{documented.artifactId}"
+			scmUrl="@{documented.scm.url}"
+		>
+			<ul>
+				<li>
+					This JSON-LD is embedded in the XHTML page, using
+					<ao:a href="https://aoindustries.com/ao-encoding/apidocs/com/aoindustries/encoding/JavaScriptInXhtmlEncoder.html#ldJsonInXhtmlEncoder">JavaScriptInXhtmlEncoder.ldJsonInXhtmlEncoder</ao:a>
+					encoder.
+				</li>
+				<li>
+					Absolute URLs are now generated in <ao:a href="https://tools.ietf.org/html/rfc3986">RFC 3986 URI</ao:a> US-ASCII
+					format always, even when <ao:a href="https://tools.ietf.org/html/rfc3987">RFC 3987 IRI</ao:a> Unicode format is active
+					on the page.  This is consistent with
+					<ao:a href="https://www.w3.org/TR/microdata/#terminology">HTML Microdata - Terminology</ao:a>:
+					<blockquote>
+						For the purposes of this specification, the terms "URL" and "URI" are equivalent. The URL specification,
+						and <ao:a href="https://tools.ietf.org/html/rfc3986">RFC 3986</ao:a> which uses the term URI, define a
+						<dfn>URL</dfn>, <dfn>valid URL</dfn>, and <dfn>absolute URL</dfn>.
+					</blockquote>
+				</li>
+			</ul>
+		</changelog:release>
 
 		<changelog:release
 			projectName="@{documented.name}"
