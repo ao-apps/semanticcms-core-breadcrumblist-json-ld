@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 semanticcms-core-breadcrumblist-json-ld - BreadcrumbList for SemanticCMS in JSON-LD format.
-Copyright (C) 2016, 2017, 2019  AO Industries, Inc.
+Copyright (C) 2016, 2017, 2019, 2020  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -36,7 +36,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-30T16:32:29-0500"
-		dateModified="2019-11-02T16:41:06-0500"
+		dateModified="2020-02-14T01:49:53-0600"
 	>
 		<!-- The current snapshot, unreleased version -->
 		<c:set var="version" value="@{com.semanticcms:semanticcms-core-breadcrumblist-json-ld:pom.version}" />
@@ -54,6 +54,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 			>
 				<ul>
 					<li>Minimum Java version changed from 1.7 to 1.8.</li>
+					<li>Using <ao:a href="https://aoindustries.com/ao-fluent-html/">AO Fluent HTML</ao:a> for HTML generation.</li>
 				</ul>
 			</changelog:release>
 		</c:if>
