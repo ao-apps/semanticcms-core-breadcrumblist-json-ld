@@ -1,6 +1,6 @@
 /*
  * semanticcms-core-breadcrumblist-json-ld - BreadcrumbList for SemanticCMS in JSON-LD format.
- * Copyright (C) 2016, 2017, 2019  AO Industries, Inc.
+ * Copyright (C) 2016, 2017, 2019, 2020  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -26,6 +26,7 @@ import static com.aoindustries.encoding.JavaScriptInXhtmlEncoder.ldJsonInXhtmlEn
 import com.aoindustries.encoding.MediaWriter;
 import static com.aoindustries.encoding.TextInJavaScriptEncoder.encodeTextInJavaScript;
 import static com.aoindustries.encoding.TextInJavaScriptEncoder.textInLdJsonEncoder;
+import com.aoindustries.html.Html;
 import com.aoindustries.net.URIEncoder;
 import com.semanticcms.core.controller.PageUtils;
 import com.semanticcms.core.controller.SemanticCMS;
@@ -37,7 +38,6 @@ import com.semanticcms.core.renderer.html.ComponentPosition;
 import com.semanticcms.core.renderer.html.HtmlRendererUtils;
 import com.semanticcms.core.renderer.html.View;
 import java.io.IOException;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -143,7 +143,7 @@ public class BreadcrumbListJsonLd implements Component {
 		ServletContext servletContext,
 		HttpServletRequest request,
 		HttpServletResponse response,
-		Writer out,
+		Html html,
 		View view,
 		Page page,
 		ComponentPosition position
@@ -164,15 +164,15 @@ public class BreadcrumbListJsonLd implements Component {
 				view,
 				contentRoot,
 				distinctLists,
-				new ArrayList<Page>(),
+				new ArrayList<>(),
 				page
 			);
 			// Hard to find it documented, but it seems that multiple breadcrumbs in JSON-LD are represented by multiple script blocks.
 			// Other attempts, such as putting multiple into an array, gave confused results (but not errors) in the google validation tool.
 			for(List<Page> list : distinctLists) {
 				// This JSON-LD is embedded in the XHTML page, use encoder
-				ldJsonInXhtmlEncoder.writePrefixTo(out);
-				MediaWriter jsonOut = new MediaWriter(ldJsonInXhtmlEncoder, out);
+				MediaWriter jsonOut = new MediaWriter(ldJsonInXhtmlEncoder, html.out);
+				jsonOut.writePrefix();
 				jsonOut.write("{\n"
 					+ "  \"@context\": \"http://schema.org\",\n"
 					+ "  \"@type\": \"BreadcrumbList\",\n"
@@ -220,7 +220,7 @@ public class BreadcrumbListJsonLd implements Component {
 				}
 				jsonOut.write("]\n"
 					+ "}\n");
-				ldJsonInXhtmlEncoder.writeSuffixTo(out);
+				jsonOut.writeSuffix();
 			}
 		}
 	}
