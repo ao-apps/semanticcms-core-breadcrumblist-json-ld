@@ -35,6 +35,7 @@ import com.semanticcms.core.model.PageRef;
 import com.semanticcms.core.model.ParentRef;
 import com.semanticcms.core.renderer.html.Component;
 import com.semanticcms.core.renderer.html.ComponentPosition;
+import com.semanticcms.core.renderer.html.HtmlRenderer;
 import com.semanticcms.core.renderer.html.HtmlRendererUtils;
 import com.semanticcms.core.renderer.html.View;
 import java.io.IOException;
@@ -43,7 +44,10 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -130,11 +134,26 @@ public class BreadcrumbListJsonLd implements Component {
 	 * interprets multiple breadcrumb list entries.
 	 * </p>
 	 */
-	public static final String FIRST_LIST_ONLY_INIT_PARAM = BreadcrumbListJsonLd.class.getName() + ".firstListOnly";
+	private static final String FIRST_LIST_ONLY_INIT_PARAM = BreadcrumbListJsonLd.class.getName() + ".firstListOnly";
+
+	@WebListener("Registers the BreadcrumbListJsonLd component in HtmlRenderer.")
+	public static class Initializer implements ServletContextListener {
+		@Override
+		public void contextInitialized(ServletContextEvent event) {
+			ServletContext servletContext = event.getServletContext();
+			// Defaults to true until Google is known to support multiple lists
+			boolean firstListOnly = !"false".equalsIgnoreCase(servletContext.getInitParameter(FIRST_LIST_ONLY_INIT_PARAM));
+			HtmlRenderer.getInstance(event.getServletContext()).addComponent(new BreadcrumbListJsonLd(firstListOnly));
+		}
+		@Override
+		public void contextDestroyed(ServletContextEvent event) {
+			// Do nothing
+		}
+	}
 
 	private final boolean firstListOnly;
 
-	public BreadcrumbListJsonLd(boolean firstListOnly) {
+	private BreadcrumbListJsonLd(boolean firstListOnly) {
 		this.firstListOnly = firstListOnly;
 	}
 
