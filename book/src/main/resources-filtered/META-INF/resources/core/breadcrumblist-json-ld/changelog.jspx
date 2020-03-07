@@ -119,7 +119,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 				<li>
 					<p>
 						Google search results seem confused by multiple <code><ao:a href="https://schema.org/BreadcrumbList">BreadcrumbList</ao:a></code>.
-						Added new <ao:a rel="nofollow" href="@{javac.link.javaeeApi.6}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">init parameter</ao:a>
+						Added new <ao:a rel="nofollow" href="@{javadoc.link.javaee}javax/servlet/ServletContext.html#getInitParameter(java.lang.String)">init parameter</ao:a>
 						<code>com.semanticcms.core.breadcrumblist.jsonld.BreadcrumbListJsonLd.firstListOnly</code>,
 						which will default to <code>true</code> until <ao:a href="https://search.google.com/structured-data/testing-tool">Google supports multiple breadcrumb lists</ao:a>.
 					</p>

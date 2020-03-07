@@ -35,8 +35,6 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 	<properties>
 		<!-- These values are copied from the project being documented -->
 		<documented.artifactId>semanticcms-core-breadcrumblist-json-ld</documented.artifactId>
-		<documented.javaVersion>1.8</documented.javaVersion>
-		<documented.javac.link.javaApi>${javac.link.javaApi.jdk8}</documented.javac.link.javaApi>
 		<documented.name>SemanticCMS Core BreadcrumbList JSON-LD²</documented.name>
 		<documented.shortTitle>BreadcrumbList JSON-LD</documented.shortTitle>
 		<documented.description>BreadcrumbList for SemanticCMS in JSON-LD format.</documented.description>
