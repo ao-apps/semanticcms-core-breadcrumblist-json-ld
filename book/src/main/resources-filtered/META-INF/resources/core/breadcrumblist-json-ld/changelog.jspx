@@ -49,9 +49,9 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 			<changelog:release
 				projectName="@{documented.name}"
 				version="#{version}"
-				groupId="@{documented.groupId}"
+				groupId="@{project.groupId}"
 				artifactId="@{documented.artifactId}"
-				scmUrl="@{documented.scm.url}"
+				scmUrl="@{project.scm.url}"
 			>
 				<ul>
 					<li>Added <core:page book="/core/pages" page="/" /> support.</li>
@@ -64,9 +64,9 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 			projectName="@{documented.name}"
 			version="1.2.0"
 			datePublished="2019-10-11T19:51:01-0500"
-			groupId="@{documented.groupId}"
+			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
-			scmUrl="@{documented.scm.url}"
+			scmUrl="@{project.scm.url}"
 		>
 			<ul>
 				<li>
@@ -92,9 +92,9 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 			projectName="@{documented.name}"
 			version="1.1.1"
 			datePublished="2019-06-22T01:34:50-0500"
-			groupId="@{documented.groupId}"
+			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
-			scmUrl="@{documented.scm.url}"
+			scmUrl="@{project.scm.url}"
 		>
 			<ul>
 				<li>Using managed dependencies:
@@ -110,9 +110,9 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 			projectName="@{documented.name}"
 			version="1.1.0"
 			datePublished="2019-04-20T17:33:26-0500"
-			groupId="@{documented.groupId}"
+			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
-			scmUrl="@{documented.scm.url}"
+			scmUrl="@{project.scm.url}"
 		>
 			<ul>
 				<li>Minimum Java version changed from 1.6 to 1.7.</li>
@@ -135,9 +135,9 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 			projectName="@{documented.name}"
 			version="1.0.2"
 			datePublished="2017-07-20T12:00:05-0500"
-			groupId="@{documented.groupId}"
+			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
-			scmUrl="@{documented.scm.url}"
+			scmUrl="@{project.scm.url}"
 		>
 			<ul>
 				<li>New release for bug fixes in underlying <ao:a href="https://aoindustries.com/ao-encoding/">AO Encoding</ao:a> library.</li>
@@ -149,9 +149,9 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 			projectName="@{documented.name}"
 			version="1.0.1"
 			datePublished="2016-11-15T20:47:49-0600"
-			groupId="@{documented.groupId}"
+			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
-			scmUrl="@{documented.scm.url}"
+			scmUrl="@{project.scm.url}"
 		>
 			<ul>
 				<li>New <ao:a href="https://aoindustries.com/ao-oss-parent/">AO OSS Parent</ao:a> POM to simplify <code>pom.xml</code> files.</li>
@@ -164,9 +164,9 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 			projectName="@{documented.name}"
 			version="1.0.0"
 			datePublished="2016-10-20T18:32:00-0500"
-			groupId="@{documented.groupId}"
+			groupId="@{project.groupId}"
 			artifactId="@{documented.artifactId}"
-			scmUrl="@{documented.scm.url}"
+			scmUrl="@{project.scm.url}"
 		>
 			<ul>
 				<li>Added breadcrumbs in JSON-LD format to semanticcms-core.</li>
