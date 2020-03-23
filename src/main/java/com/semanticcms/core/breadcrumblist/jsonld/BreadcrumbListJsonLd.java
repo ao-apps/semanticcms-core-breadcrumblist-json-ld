@@ -28,6 +28,7 @@ import static com.aoindustries.encoding.TextInJavaScriptEncoder.encodeTextInJava
 import static com.aoindustries.encoding.TextInJavaScriptEncoder.textInLdJsonEncoder;
 import com.aoindustries.html.Html;
 import com.aoindustries.net.URIEncoder;
+import com.semanticcms.core.controller.Book;
 import com.semanticcms.core.controller.PageUtils;
 import com.semanticcms.core.controller.SemanticCMS;
 import com.semanticcms.core.model.Page;
