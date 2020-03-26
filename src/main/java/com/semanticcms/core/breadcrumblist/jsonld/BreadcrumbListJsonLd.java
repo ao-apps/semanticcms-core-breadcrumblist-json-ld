@@ -22,9 +22,9 @@
  */
 package com.semanticcms.core.breadcrumblist.jsonld;
 
+import com.aoindustries.encoding.EncodingContext;
 import static com.aoindustries.encoding.JavaScriptInXhtmlEncoder.ldJsonInXhtmlEncoder;
 import com.aoindustries.encoding.MediaWriter;
-import static com.aoindustries.encoding.TextInJavaScriptEncoder.encodeTextInJavaScript;
 import static com.aoindustries.encoding.TextInJavaScriptEncoder.textInLdJsonEncoder;
 import com.aoindustries.html.Html;
 import com.aoindustries.net.URIEncoder;
@@ -189,7 +189,7 @@ public class BreadcrumbListJsonLd implements Component {
 			// Other attempts, such as putting multiple into an array, gave confused results (but not errors) in the google validation tool.
 			for(List<Page> list : distinctLists) {
 				// This JSON-LD is embedded in the XHTML page, use encoder
-				MediaWriter jsonOut = new MediaWriter(ldJsonInXhtmlEncoder, html.out);
+				MediaWriter jsonOut = new MediaWriter(EncodingContext.XML, ldJsonInXhtmlEncoder, html.out);
 				jsonOut.writePrefix();
 				jsonOut.write("{\n"
 					+ "  \"@context\": \"http://schema.org\",\n"
@@ -216,7 +216,7 @@ public class BreadcrumbListJsonLd implements Component {
 						jsonOut
 					);
 					jsonOut.write("\",\n"
-						+ "      \"name\": \"");
+						+ "      \"name\": ");
 					// The parent used for shortTitle resolution, if any
 					PageRef parentPageRef;
 					if(i < (size - 1)) {
@@ -230,8 +230,8 @@ public class BreadcrumbListJsonLd implements Component {
 							parentPageRef = null;
 						}
 					}
-					encodeTextInJavaScript(PageUtils.getShortTitle(parentPageRef, item), jsonOut);
-					jsonOut.write("\"\n"
+					jsonOut.text(PageUtils.getShortTitle(parentPageRef, item));
+					jsonOut.write("\n"
 						+ "    }\n"
 						+ "  }");
 					if(i != 0) jsonOut.write(',');
