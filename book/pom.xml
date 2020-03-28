@@ -54,6 +54,11 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 		<tag>HEAD</tag>
 	</scm>
 
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/aoindustries/semanticcms-core-breadcrumblist-json-ld/issues</url>
+	</issueManagement>
+
 	<dependencyManagement>
 		<dependencies>
 			<!-- Java EE -->
