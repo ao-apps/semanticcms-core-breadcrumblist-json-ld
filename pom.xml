@@ -71,6 +71,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 								<link>${javadoc.link.javaee}</link>
 								<!-- Direct -->
 								<link>https://aoindustries.com/ao-encoding/apidocs/</link>
+								<link>https://aoindustries.com/ao-fluent-html/apidocs/</link>
 								<link>https://aoindustries.com/ao-net-types/apidocs/</link>
 								<link>https://semanticcms.com/core/controller/apidocs/</link>
 								<link>https://semanticcms.com/core/model/apidocs/</link>
@@ -96,6 +97,9 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 				<groupId>com.aoindustries</groupId><artifactId>ao-encoding</artifactId><version>3.0.0${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
+				<groupId>com.aoindustries</groupId><artifactId>ao-fluent-html</artifactId><version>0.1.0${POST-SNAPSHOT}</version>
+			</dependency>
+			<dependency>
 				<groupId>com.aoindustries</groupId><artifactId>ao-net-types</artifactId><version>1.2.1${POST-SNAPSHOT}</version>
 			</dependency>
 			<dependency>
@@ -119,6 +123,9 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 		<!-- Direct -->
 		<dependency>
 			<groupId>com.aoindustries</groupId><artifactId>ao-encoding</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.aoindustries</groupId><artifactId>ao-fluent-html</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.aoindustries</groupId><artifactId>ao-net-types</artifactId>
