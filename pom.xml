@@ -33,11 +33,11 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 	<packaging>bundle</packaging>
 
 	<properties>
-		<javadoc.breadcrumbs><![CDATA[<a target="_top" href="https://semanticcms.com/">SemanticCMS</a>
-/ <a target="_top" href="https://semanticcms.com/core/">Core</a>
-/ <a target="_top" href="${project.url}">${shortTitle}</a>]]></javadoc.breadcrumbs>
+		<javadoc.breadcrumbs><![CDATA[<a target="${javadoc.target}" href="https://semanticcms.com/">SemanticCMS</a>
+/ <a target="${javadoc.target}" href="https://semanticcms.com/core/">Core</a>
+/ <a target="${javadoc.target}" href="${project.url}">${shortTitle}</a>]]></javadoc.breadcrumbs>
 		<shortTitle>BreadcrumbList JSON-LD</shortTitle>
-		<description.html><![CDATA[<a target="_top" href="https://schema.org/BreadcrumbList">BreadcrumbList</a> for <a target="_top" href="https://semanticcms.com/">SemanticCMS</a> in <a target="_top" href="http://json-ld.org/">JSON-LD</a> format.]]></description.html>
+		<description.html><![CDATA[<a target="${javadoc.target}" href="https://schema.org/BreadcrumbList">BreadcrumbList</a> for <a target="${javadoc.target}" href="https://semanticcms.com/">SemanticCMS</a> in <a target="${javadoc.target}" href="http://json-ld.org/">JSON-LD</a> format.]]></description.html>
 	</properties>
 
 	<name>SemanticCMS Core BreadcrumbList JSON-LD²</name>

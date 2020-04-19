@@ -39,7 +39,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 		<documented.shortTitle>BreadcrumbList JSON-LD</documented.shortTitle>
 		<documented.description>BreadcrumbList for SemanticCMS in JSON-LD format.</documented.description>
 
-		<description.html><![CDATA[Documentation for <a target="_top" href="${project.url}">${documented.name}</a> in <a target="_top" href="https://semanticcms.com/">SemanticCMS</a> format.]]></description.html>
+		<description.html><![CDATA[Documentation for <a target="${javadoc.target}" href="${project.url}">${documented.name}</a> in <a target="${javadoc.target}" href="https://semanticcms.com/">SemanticCMS</a> format.]]></description.html>
 	</properties>
 
 	<name>SemanticCMS Core BreadcrumbList JSON-LD² Book</name>
