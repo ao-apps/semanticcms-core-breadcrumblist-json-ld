@@ -35,7 +35,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 		<ao:forward page="index.html" />
 	</c:if>
 	<core:page
-		title="@{documented.name} @{com.semanticcms:semanticcms-core-breadcrumblist-json-ld:pom.version} API Docs"
+		title="@{documented.name} ${ao:getProjectVersion('./', 'com.semanticcms', 'semanticcms-core-breadcrumblist-json-ld', '¿@{project.version}?')} API Docs"
 		shortTitle="API Docs"
 		datePublished="2016-10-20T01:07:00-0500"
 		dateModified="${ao:getLastModified('index.html')}"
