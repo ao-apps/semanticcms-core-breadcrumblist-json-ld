@@ -94,34 +94,34 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 									<artifactItems>
 										<!-- Direct -->
 										<artifactItem>
-											<groupId>com.aoindustries</groupId><artifactId>ao-encoding</artifactId>
-											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<groupId>com.aoindustries</groupId><artifactId>ao-encoding</artifactId><classifier>javadoc</classifier>
+											<includes>element-list, package-list</includes>
 											<outputDirectory>${project.build.directory}/offlineLinks/com.aoindustries/ao-encoding</outputDirectory>
 										</artifactItem>
 										<artifactItem>
-											<groupId>com.aoindustries</groupId><artifactId>ao-fluent-html</artifactId>
-											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<groupId>com.aoindustries</groupId><artifactId>ao-fluent-html</artifactId><classifier>javadoc</classifier>
+											<includes>element-list, package-list</includes>
 											<outputDirectory>${project.build.directory}/offlineLinks/com.aoindustries/ao-fluent-html</outputDirectory>
 										</artifactItem>
 										<artifactItem>
-											<groupId>com.aoindustries</groupId><artifactId>ao-net-types</artifactId>
-											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<groupId>com.aoindustries</groupId><artifactId>ao-net-types</artifactId><classifier>javadoc</classifier>
+											<includes>element-list, package-list</includes>
 											<outputDirectory>${project.build.directory}/offlineLinks/com.aoindustries/ao-net-types</outputDirectory>
 										</artifactItem>
 										<!-- ao-javadoc-offline: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId> -->
 										<artifactItem>
-											<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-controller</artifactId>
-											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-controller</artifactId><classifier>javadoc</classifier>
+											<includes>element-list, package-list</includes>
 											<outputDirectory>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-core-controller</outputDirectory>
 										</artifactItem>
 										<artifactItem>
-											<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-model</artifactId>
-											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-model</artifactId><classifier>javadoc</classifier>
+											<includes>element-list, package-list</includes>
 											<outputDirectory>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-core-model</outputDirectory>
 										</artifactItem>
 										<artifactItem>
-											<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-renderer-html</artifactId>
-											<classifier>javadoc</classifier><includes>element-list, package-list</includes>
+											<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-renderer-html</artifactId><classifier>javadoc</classifier>
+											<includes>element-list, package-list</includes>
 											<outputDirectory>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-core-renderer-html</outputDirectory>
 										</artifactItem>
 									</artifactItems>
