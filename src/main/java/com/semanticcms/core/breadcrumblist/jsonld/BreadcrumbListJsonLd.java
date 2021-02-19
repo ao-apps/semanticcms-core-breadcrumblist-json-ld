@@ -1,6 +1,6 @@
 /*
  * semanticcms-core-breadcrumblist-json-ld - BreadcrumbList for SemanticCMS in JSON-LD format.
- * Copyright (C) 2016, 2017, 2019, 2020  AO Industries, Inc.
+ * Copyright (C) 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -26,7 +26,7 @@ import com.aoindustries.encoding.EncodingContext;
 import static com.aoindustries.encoding.JavaScriptInXhtmlEncoder.ldJsonInXhtmlEncoder;
 import com.aoindustries.encoding.MediaWriter;
 import static com.aoindustries.encoding.TextInJavaScriptEncoder.textInLdJsonEncoder;
-import com.aoindustries.html.Html;
+import com.aoindustries.html.Document;
 import com.aoindustries.net.URIEncoder;
 import com.semanticcms.core.model.Book;
 import com.semanticcms.core.model.Page;
@@ -161,7 +161,7 @@ public class BreadcrumbListJsonLd implements Component {
 		ServletContext servletContext,
 		HttpServletRequest request,
 		HttpServletResponse response,
-		Html html,
+		Document document,
 		View view,
 		Page page,
 		ComponentPosition position
@@ -189,7 +189,7 @@ public class BreadcrumbListJsonLd implements Component {
 			// Other attempts, such as putting multiple into an array, gave confused results (but not errors) in the google validation tool.
 			for(List<Page> list : distinctLists) {
 				// This JSON-LD is embedded in the XHTML page, use encoder
-				MediaWriter jsonOut = new MediaWriter(EncodingContext.XML, ldJsonInXhtmlEncoder, html.out);
+				MediaWriter jsonOut = new MediaWriter(EncodingContext.XML, ldJsonInXhtmlEncoder, document.out);
 				jsonOut.writePrefix();
 				jsonOut.write("{\n"
 					+ "  \"@context\": \"http://schema.org\",\n"
