@@ -26,7 +26,7 @@ import com.aoindustries.encoding.EncodingContext;
 import static com.aoindustries.encoding.JavaScriptInXhtmlEncoder.ldJsonInXhtmlEncoder;
 import com.aoindustries.encoding.MediaWriter;
 import static com.aoindustries.encoding.TextInJavaScriptEncoder.textInLdJsonEncoder;
-import com.aoindustries.html.Document;
+import com.aoindustries.html.servlet.DocumentEE;
 import com.aoindustries.net.URIEncoder;
 import com.semanticcms.core.model.Book;
 import com.semanticcms.core.model.Page;
@@ -161,7 +161,7 @@ public class BreadcrumbListJsonLd implements Component {
 		ServletContext servletContext,
 		HttpServletRequest request,
 		HttpServletResponse response,
-		Document document,
+		DocumentEE document,
 		View view,
 		Page page,
 		ComponentPosition position
