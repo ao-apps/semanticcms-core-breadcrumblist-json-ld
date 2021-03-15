@@ -189,56 +189,57 @@ public class BreadcrumbListJsonLd implements Component {
 			// Other attempts, such as putting multiple into an array, gave confused results (but not errors) in the google validation tool.
 			for(List<Page> list : distinctLists) {
 				// This JSON-LD is embedded in the XHTML page, use encoder
-				MediaWriter jsonOut = new MediaWriter(EncodingContext.XML, ldJsonInXhtmlEncoder, document.out);
-				jsonOut.writePrefix();
-				jsonOut.write("{\n"
-					+ "  \"@context\": \"http://schema.org\",\n"
-					+ "  \"@type\": \"BreadcrumbList\",\n"
-					+ "  \"itemListElement\": [");
-				for(
-					int size = list.size(),
-						i = size-1;
-					i >= 0;
-					i--
-				) {
-					Page item = list.get(i);
+				try (MediaWriter jsonOut = new MediaWriter(EncodingContext.XML, ldJsonInXhtmlEncoder, document.unsafe())) {
+					jsonOut.writePrefix();
 					jsonOut.write("{\n"
-						+ "    \"@type\": \"ListItem\",\n"
-						+ "    \"position\": ");
-					jsonOut.write(Integer.toString(size - i));
-					jsonOut.write(",\n"
-						+ "    \"item\": {\n"
-						+ "      \"@id\": \"");
-					// Write US-ASCII always per https://www.w3.org/TR/microdata/#terminology
-					URIEncoder.encodeURI(
-						view.getCanonicalUrl(servletContext, request, response, item),
-						textInLdJsonEncoder,
-						jsonOut
-					);
-					jsonOut.write("\",\n"
-						+ "      \"name\": ");
-					// The parent used for shortTitle resolution, if any
-					PageRef parentPageRef;
-					if(i < (size - 1)) {
-						parentPageRef = list.get(i + 1).getPageRef();
-					} else {
-						// If there is one, and only one, parent that is applicable to the given view, use it as shortTitle context
-						Set<Page> applicableParents = PageUtils.getApplicableParents(servletContext, request, response, view, item);
-						if(applicableParents.size() == 1) {
-							parentPageRef = applicableParents.iterator().next().getPageRef();
+						+ "  \"@context\": \"http://schema.org\",\n"
+						+ "  \"@type\": \"BreadcrumbList\",\n"
+						+ "  \"itemListElement\": [");
+					for(
+						int size = list.size(),
+							i = size-1;
+						i >= 0;
+						i--
+					) {
+						Page item = list.get(i);
+						jsonOut.write("{\n"
+							+ "    \"@type\": \"ListItem\",\n"
+							+ "    \"position\": ");
+						jsonOut.write(Integer.toString(size - i));
+						jsonOut.write(",\n"
+							+ "    \"item\": {\n"
+							+ "      \"@id\": \"");
+						// Write US-ASCII always per https://www.w3.org/TR/microdata/#terminology
+						URIEncoder.encodeURI(
+							view.getCanonicalUrl(servletContext, request, response, item),
+							textInLdJsonEncoder,
+							jsonOut
+						);
+						jsonOut.write("\",\n"
+							+ "      \"name\": ");
+						// The parent used for shortTitle resolution, if any
+						PageRef parentPageRef;
+						if(i < (size - 1)) {
+							parentPageRef = list.get(i + 1).getPageRef();
 						} else {
-							parentPageRef = null;
+							// If there is one, and only one, parent that is applicable to the given view, use it as shortTitle context
+							Set<Page> applicableParents = PageUtils.getApplicableParents(servletContext, request, response, view, item);
+							if(applicableParents.size() == 1) {
+								parentPageRef = applicableParents.iterator().next().getPageRef();
+							} else {
+								parentPageRef = null;
+							}
 						}
+						jsonOut.text(PageUtils.getShortTitle(parentPageRef, item));
+						jsonOut.write("\n"
+							+ "    }\n"
+							+ "  }");
+						if(i != 0) jsonOut.write(',');
 					}
-					jsonOut.text(PageUtils.getShortTitle(parentPageRef, item));
-					jsonOut.write("\n"
-						+ "    }\n"
-						+ "  }");
-					if(i != 0) jsonOut.write(',');
+					jsonOut.write("]\n"
+						+ "}\n");
+					jsonOut.writeSuffix();
 				}
-				jsonOut.write("]\n"
-					+ "}\n");
-				jsonOut.writeSuffix();
 			}
 		}
 	}
