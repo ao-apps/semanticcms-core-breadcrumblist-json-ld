@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 semanticcms-core-breadcrumblist-json-ld - BreadcrumbList for SemanticCMS in JSON-LD format.
-Copyright (C) 2016, 2017, 2019, 2020  AO Industries, Inc.
+Copyright (C) 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
     support@aoindustries.com
     7262 Bull Pen Cir
     Mobile, AL 36695
@@ -35,7 +35,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 		title="@{documented.name}"
 		shortTitle="@{documented.shortTitle}"
 		description="@{documented.description}"
-		datePublished="2016-10-20T01:07:00-0500"
+		datePublished="2016-10-20T01:07:00-05:00"
 		dateModified="2020-03-24T14:01:33-05:00"
 	>
 		<core:child page="changelog.jspx" />
@@ -52,7 +52,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 				arg.license="lgpl-3.0"
 			/>
 		</header>
-		<news:news pubDate="2016-10-19T23:41:28-0500">
+		<news:news pubDate="2016-10-19T23:41:28-05:00">
 			Created new <core:link page="index.jspx" /> module to add <ao:a href="https://schema.org/BreadcrumbList">BreadcrumbLists</ao:a>
 			in <ao:a href="http://json-ld.org/">JSON-LD</ao:a> format to <core:link book="/" page="/index.jspx" /> pages.
 		</news:news>
