@@ -22,12 +22,12 @@
  */
 package com.semanticcms.core.breadcrumblist.jsonld;
 
-import com.aoindustries.encoding.EncodingContext;
-import static com.aoindustries.encoding.JavaScriptInXhtmlEncoder.ldJsonInXhtmlEncoder;
-import com.aoindustries.encoding.MediaWriter;
-import static com.aoindustries.encoding.TextInJavaScriptEncoder.textInLdJsonEncoder;
-import com.aoindustries.html.servlet.DocumentEE;
-import com.aoindustries.net.URIEncoder;
+import com.aoapps.encoding.EncodingContext;
+import static com.aoapps.encoding.JavaScriptInXhtmlEncoder.ldJsonInXhtmlEncoder;
+import com.aoapps.encoding.MediaWriter;
+import static com.aoapps.encoding.TextInJavaScriptEncoder.textInLdJsonEncoder;
+import com.aoapps.html.servlet.DocumentEE;
+import com.aoapps.net.URIEncoder;
 import com.semanticcms.core.controller.Book;
 import com.semanticcms.core.controller.PageUtils;
 import com.semanticcms.core.controller.SemanticCMS;
