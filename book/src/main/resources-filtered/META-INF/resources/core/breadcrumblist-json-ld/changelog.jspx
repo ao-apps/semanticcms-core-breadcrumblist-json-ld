@@ -45,7 +45,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 				version="@{project.version}"
 				groupId="@{project.groupId}"
 				artifactId="@{documented.artifactId}"
-				repository="https://oss.sonatype.org/content/repositories/snapshots/"
+				repository="@{nexusUrl}content/repositories/snapshots/"
 				scmUrl="@{project.scm.url}"
 			>
 				<ul>
