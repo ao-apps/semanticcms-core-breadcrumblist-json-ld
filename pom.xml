@@ -38,7 +38,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 / <a target="${javadoc.target}" href="https://semanticcms.com/core/">Core</a>
 / <a target="${javadoc.target}" href="${project.url}">BreadcrumbList JSON-LD</a>]]></javadoc.breadcrumbs>
 		<description.html><![CDATA[<a target="${javadoc.target}" href="https://schema.org/BreadcrumbList">BreadcrumbList</a> for <a target="${javadoc.target}" href="https://semanticcms.com/">SemanticCMS</a> in <a target="${javadoc.target}" href="http://json-ld.org/">JSON-LD</a> format.]]></description.html>
-		<!-- SonarCloud.io -->
+		<!-- SonarQube -->
 		<sonar.projectKey>${project.groupId}:${project.artifactId}</sonar.projectKey>
 		<sonar.organization>aoindustries</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
