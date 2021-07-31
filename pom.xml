@@ -156,7 +156,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId><artifactId>maven-javadoc-plugin</artifactId>
 						<configuration>
-							<offlineLinks>
+							<offlineLinks combine.children="append">
 								<!-- Direct -->
 								<offlineLink>
 									<url>https://oss.aoapps.com/encoding/apidocs/</url>
@@ -170,7 +170,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 									<url>https://oss.aoapps.com/net-types/apidocs/</url>
 									<location>${project.build.directory}/offlineLinks/com.aoapps/ao-net-types</location>
 								</offlineLink>
-								<!-- Java EE: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId> -->
+								<!-- ao-javadoc-offline: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId> -->
 								<offlineLink>
 									<url>https://semanticcms.com/core/controller/apidocs/</url>
 									<location>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-core-controller</location>
@@ -182,16 +182,6 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 								<offlineLink>
 									<url>https://semanticcms.com/core/renderer/html/apidocs/</url>
 									<location>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-core-renderer-html</location>
-								</offlineLink>
-								<!-- Java SE -->
-								<offlineLink>
-									<url>${javadoc.link.javase}</url>
-									<location>${project.build.directory}/offlineLinks/com/aoapps/javadoc/offline/javase/${javase.release}</location>
-								</offlineLink>
-								<!-- Java EE -->
-								<offlineLink>
-									<url>${javadoc.link.javaee}</url>
-									<location>${project.build.directory}/offlineLinks/com/aoapps/javadoc/offline/javaee/${javaee.version}</location>
 								</offlineLink>
 							</offlineLinks>
 						</configuration>
