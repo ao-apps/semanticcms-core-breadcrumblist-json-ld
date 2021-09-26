@@ -37,7 +37,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 		shortTitle="Changelog"
 		tocLevels="1"
 		datePublished="2016-10-30T16:32:29-05:00"
-		dateModified="2021-07-18T23:40:51-05:00"
+		dateModified="2021-09-25T23:27:50-05:00"
 	>
 		<c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
 			<changelog:release
@@ -117,13 +117,13 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 					encoder.
 				</li>
 				<li>
-					Absolute URLs are now generated in <ao:a href="https://tools.ietf.org/html/rfc3986">RFC 3986 URI</ao:a> US-ASCII
-					format always, even when <ao:a href="https://tools.ietf.org/html/rfc3987">RFC 3987 IRI</ao:a> Unicode format is active
+					Absolute URLs are now generated in <ao:a href="https://datatracker.ietf.org/doc/html/rfc3986">RFC 3986 URI</ao:a> US-ASCII
+					format always, even when <ao:a href="https://datatracker.ietf.org/doc/html/rfc3987">RFC 3987 IRI</ao:a> Unicode format is active
 					on the page.  This is consistent with
 					<ao:a href="https://www.w3.org/TR/microdata/#terminology">HTML Microdata - Terminology</ao:a>:
 					<blockquote>
 						For the purposes of this specification, the terms "URL" and "URI" are equivalent. The URL specification,
-						and <ao:a href="https://tools.ietf.org/html/rfc3986">RFC 3986</ao:a> which uses the term URI, define a
+						and <ao:a href="https://datatracker.ietf.org/doc/html/rfc3986">RFC 3986</ao:a> which uses the term URI, define a
 						<dfn>URL</dfn>, <dfn>valid URL</dfn>, and <dfn>absolute URL</dfn>.
 					</blockquote>
 				</li>
