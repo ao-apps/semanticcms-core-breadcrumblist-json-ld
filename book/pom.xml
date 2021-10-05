@@ -71,20 +71,20 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <http://www.gnu
 	</developers>
 
 	<scm>
-		<connection>scm:git:git://github.com/aoindustries/semanticcms-core-breadcrumblist-json-ld.git</connection>
-		<developerConnection>scm:git:git@github.com:aoindustries/semanticcms-core-breadcrumblist-json-ld.git</developerConnection>
-		<url>https://github.com/aoindustries/semanticcms-core-breadcrumblist-json-ld</url>
+		<connection>scm:git:git://github.com/ao-apps/semanticcms-core-breadcrumblist-json-ld.git</connection>
+		<developerConnection>scm:git:git@github.com:ao-apps/semanticcms-core-breadcrumblist-json-ld.git</developerConnection>
+		<url>https://github.com/ao-apps/semanticcms-core-breadcrumblist-json-ld</url>
 		<tag>HEAD</tag>
 	</scm>
 
 	<issueManagement>
 		<system>GitHub Issues</system>
-		<url>https://github.com/aoindustries/semanticcms-core-breadcrumblist-json-ld/issues</url>
+		<url>https://github.com/ao-apps/semanticcms-core-breadcrumblist-json-ld/issues</url>
 	</issueManagement>
 
 	<ciManagement>
 		<system>GitHub Actions</system>
-		<url>https://github.com/aoindustries/semanticcms-core-breadcrumblist-json-ld/actions</url>
+		<url>https://github.com/ao-apps/semanticcms-core-breadcrumblist-json-ld/actions</url>
 	</ciManagement>
 
 	<repositories>
