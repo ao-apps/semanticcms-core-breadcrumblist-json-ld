@@ -100,6 +100,9 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gn
 			<releases>
 				<enabled>false</enabled>
 			</releases>
+			<snapshots>
+				<checksumPolicy>fail</checksumPolicy>
+			</snapshots>
 		</repository>
 	</repositories>
 
