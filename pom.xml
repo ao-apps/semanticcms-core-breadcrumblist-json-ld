@@ -87,9 +87,15 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gn
 	</issueManagement>
 
 	<ciManagement>
+		<system>Jenkins</system>
+		<url>https://jenkins.aoindustries.com/job/ao/job/semanticcms-1.x/job/core/job/breadcrumblist-json-ld/</url>
+	</ciManagement>
+	<!-- Only one allowed in POM:
+	<ciManagement>
 		<system>GitHub Actions</system>
 		<url>https://github.com/ao-apps/semanticcms-core-breadcrumblist-json-ld/actions</url>
 	</ciManagement>
+	-->
 
 	<repositories>
 		<!-- Repository required here, too, so can find parent -->
@@ -134,7 +140,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gn
 											<includes>element-list, package-list</includes>
 											<outputDirectory>${project.build.directory}/offlineLinks/com.aoapps/ao-net-types</outputDirectory>
 										</artifactItem>
-										<!-- ao-javadoc-offline: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId> -->
+										<!-- ao-javadoc-offline: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId><classifier>javadoc</classifier> -->
 										<artifactItem>
 											<groupId>com.semanticcms</groupId><artifactId>semanticcms-core-model</artifactId><classifier>javadoc</classifier>
 											<includes>element-list, package-list</includes>
@@ -167,7 +173,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gn
 									<url>https://oss.aoapps.com/net-types/apidocs/</url>
 									<location>${project.build.directory}/offlineLinks/com.aoapps/ao-net-types</location>
 								</offlineLink>
-								<!-- ao-javadoc-offline: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId> -->
+								<!-- ao-javadoc-offline: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId><classifier>javadoc</classifier> -->
 								<offlineLink>
 									<url>https://semanticcms.com/core/model/apidocs/</url>
 									<location>${project.build.directory}/offlineLinks/com.semanticcms/semanticcms-core-model</location>
