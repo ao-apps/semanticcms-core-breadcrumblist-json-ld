@@ -1,6 +1,6 @@
 /*
  * semanticcms-core-breadcrumblist-json-ld - BreadcrumbList for SemanticCMS in JSON-LD format.
- * Copyright (C) 2016, 2017, 2019, 2020, 2021  AO Industries, Inc.
+ * Copyright (C) 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -22,10 +22,11 @@
  */
 package com.semanticcms.core.breadcrumblist.jsonld;
 
-import com.aoapps.encoding.EncodingContext;
-import static com.aoapps.encoding.JavaScriptInXhtmlEncoder.ldJsonInXhtmlEncoder;
+import com.aoapps.encoding.MediaEncoder;
+import com.aoapps.encoding.MediaType;
 import com.aoapps.encoding.MediaWriter;
 import static com.aoapps.encoding.TextInJavaScriptEncoder.textInLdJsonEncoder;
+import com.aoapps.encoding.servlet.EncodingContextEE;
 import com.aoapps.html.servlet.DocumentEE;
 import com.aoapps.net.URIEncoder;
 import com.semanticcms.core.model.Book;
@@ -185,11 +186,18 @@ public class BreadcrumbListJsonLd implements Component {
 				new ArrayList<>(),
 				page
 			);
+			EncodingContextEE encodingContext = new EncodingContextEE(servletContext, request, response);
 			// Hard to find it documented, but it seems that multiple breadcrumbs in JSON-LD are represented by multiple script blocks.
 			// Other attempts, such as putting multiple into an array, gave confused results (but not errors) in the google validation tool.
 			for(List<Page> list : distinctLists) {
 				// This JSON-LD is embedded in the XHTML page, use encoder
-				try (MediaWriter jsonOut = new MediaWriter(EncodingContext.XML, ldJsonInXhtmlEncoder, document.unsafe())) {
+				try (
+					MediaWriter jsonOut = new MediaWriter(
+						encodingContext,
+						MediaEncoder.getInstance(encodingContext, MediaType.LD_JSON, MediaType.XHTML),
+						document.unsafe()
+					)
+				) {
 					jsonOut.writePrefix();
 					jsonOut.write("{\n"
 						+ "  \"@context\": \"http://schema.org\",\n"
