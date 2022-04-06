@@ -22,9 +22,9 @@
  */
 package com.semanticcms.core.breadcrumblist.jsonld;
 
+import com.aoapps.encoding.LdJsonWriter;
 import com.aoapps.encoding.MediaEncoder;
 import com.aoapps.encoding.MediaType;
-import com.aoapps.encoding.MediaWriter;
 import static com.aoapps.encoding.TextInJavaScriptEncoder.textInLdJsonEncoder;
 import com.aoapps.encoding.servlet.EncodingContextEE;
 import com.aoapps.html.servlet.DocumentEE;
@@ -192,7 +192,7 @@ public class BreadcrumbListJsonLd implements Component {
 			for(List<Page> list : distinctLists) {
 				// This JSON-LD is embedded in the XHTML page, use encoder
 				try (
-					MediaWriter jsonOut = new MediaWriter(
+					LdJsonWriter jsonOut = new LdJsonWriter(
 						encodingContext,
 						MediaEncoder.getInstance(encodingContext, MediaType.LD_JSON, MediaType.XHTML),
 						document.unsafe()
