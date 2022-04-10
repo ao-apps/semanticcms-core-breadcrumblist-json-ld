@@ -192,6 +192,7 @@ public class BreadcrumbListJsonLd implements Component {
 			for(List<Page> list : distinctLists) {
 				// This JSON-LD is embedded in the XHTML page, use encoder
 				try (
+					@SuppressWarnings("deprecation")
 					LdJsonWriter jsonOut = new LdJsonWriter(
 						encodingContext,
 						MediaEncoder.getInstance(encodingContext, MediaType.LD_JSON, MediaType.XHTML),
