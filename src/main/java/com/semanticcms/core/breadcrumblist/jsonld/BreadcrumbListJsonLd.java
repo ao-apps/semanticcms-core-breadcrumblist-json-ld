@@ -20,6 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 package com.semanticcms.core.breadcrumblist.jsonld;
 
 import com.aoapps.encoding.LdJsonWriter;

@@ -1,6 +1,6 @@
 /*
  * semanticcms-core-breadcrumblist-json-ld - BreadcrumbList for SemanticCMS in JSON-LD format.
- * Copyright (C) 2021  AO Industries, Inc.
+ * Copyright (C) 2021, 2022  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -20,6 +20,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 package com.semanticcms.core.breadcrumblist.jsonld.book;
 
 import com.aoapps.net.URIParametersUtils;
