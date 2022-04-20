@@ -125,176 +125,184 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class BreadcrumbListJsonLd implements Component {
 
-	/**
-	 * Google search results seem confused by multiple <code><a href="https://schema.org/BreadcrumbList">BreadcrumbList</a></code>.
-	 * <p>
-	 * This is still true as of 2019-04-18.  Setting this to {@code true} will only
-	 * provide the first of the breadcrumb lists.  Thus the page parent/child relationship
-	 * ordering will select which of the possible breadcrumb lists is provided.
-	 * </p>
-	 * <p>
-	 * This defaults to {@code true}, and will continue to do so until Google correctly
-	 * interprets multiple breadcrumb list entries.
-	 * </p>
-	 */
-	private static final String FIRST_LIST_ONLY_INIT_PARAM = BreadcrumbListJsonLd.class.getName() + ".firstListOnly";
+  /**
+   * Google search results seem confused by multiple <code><a href="https://schema.org/BreadcrumbList">BreadcrumbList</a></code>.
+   * <p>
+   * This is still true as of 2019-04-18.  Setting this to {@code true} will only
+   * provide the first of the breadcrumb lists.  Thus the page parent/child relationship
+   * ordering will select which of the possible breadcrumb lists is provided.
+   * </p>
+   * <p>
+   * This defaults to {@code true}, and will continue to do so until Google correctly
+   * interprets multiple breadcrumb list entries.
+   * </p>
+   */
+  private static final String FIRST_LIST_ONLY_INIT_PARAM = BreadcrumbListJsonLd.class.getName() + ".firstListOnly";
 
-	@WebListener("Registers the BreadcrumbListJsonLd component in HtmlRenderer.")
-	public static class Initializer implements ServletContextListener {
-		@Override
-		public void contextInitialized(ServletContextEvent event) {
-			ServletContext servletContext = event.getServletContext();
-			// Defaults to true until Google is known to support multiple lists
-			boolean firstListOnly = !"false".equalsIgnoreCase(servletContext.getInitParameter(FIRST_LIST_ONLY_INIT_PARAM));
-			HtmlRenderer.getInstance(event.getServletContext()).addComponent(new BreadcrumbListJsonLd(firstListOnly));
-		}
-		@Override
-		public void contextDestroyed(ServletContextEvent event) {
-			// Do nothing
-		}
-	}
+  @WebListener("Registers the BreadcrumbListJsonLd component in HtmlRenderer.")
+  public static class Initializer implements ServletContextListener {
+    @Override
+    public void contextInitialized(ServletContextEvent event) {
+      ServletContext servletContext = event.getServletContext();
+      // Defaults to true until Google is known to support multiple lists
+      boolean firstListOnly = !"false".equalsIgnoreCase(servletContext.getInitParameter(FIRST_LIST_ONLY_INIT_PARAM));
+      HtmlRenderer.getInstance(event.getServletContext()).addComponent(new BreadcrumbListJsonLd(firstListOnly));
+    }
+    @Override
+    public void contextDestroyed(ServletContextEvent event) {
+      // Do nothing
+    }
+  }
 
-	private final boolean firstListOnly;
+  private final boolean firstListOnly;
 
-	private BreadcrumbListJsonLd(boolean firstListOnly) {
-		this.firstListOnly = firstListOnly;
-	}
+  private BreadcrumbListJsonLd(boolean firstListOnly) {
+    this.firstListOnly = firstListOnly;
+  }
 
-	@Override
-	public void doComponent(
-		ServletContext servletContext,
-		HttpServletRequest request,
-		HttpServletResponse response,
-		DocumentEE document,
-		View view,
-		Page page,
-		ComponentPosition position
-	) throws ServletException, IOException {
-		if(
-			view != null
-			&& page != null
-			&& position == ComponentPosition.HEAD_END
-		) {
-			PageRef contentRoot = SemanticCMS.getInstance(servletContext).getRootBook().getContentRoot();
-			// Find each distinct list, these will be in reverse order as a consequence of the traversal
-			Set<List<Page>> distinctLists = new LinkedHashSet<>();
-			findDistinctListsRecursive(
-				firstListOnly,
-				servletContext,
-				request,
-				response,
-				view,
-				contentRoot,
-				distinctLists,
-				new ArrayList<>(),
-				page
-			);
-			EncodingContextEE encodingContext = new EncodingContextEE(servletContext, request, response);
-			// Hard to find it documented, but it seems that multiple breadcrumbs in JSON-LD are represented by multiple script blocks.
-			// Other attempts, such as putting multiple into an array, gave confused results (but not errors) in the google validation tool.
-			for(List<Page> list : distinctLists) {
-				// This JSON-LD is embedded in the XHTML page, use encoder
-				try (
-					@SuppressWarnings("deprecation")
-					LdJsonWriter jsonOut = new LdJsonWriter(
-						encodingContext,
-						MediaEncoder.getInstance(encodingContext, MediaType.LD_JSON, MediaType.XHTML),
-						document.unsafe()
-					)
-				) {
-					jsonOut.writePrefix();
-					jsonOut.write("{\n"
-						+ "  \"@context\": \"http://schema.org\",\n"
-						+ "  \"@type\": \"BreadcrumbList\",\n"
-						+ "  \"itemListElement\": [");
-					for(
-						int size = list.size(),
-							i = size-1;
-						i >= 0;
-						i--
-					) {
-						Page item = list.get(i);
-						jsonOut.write("{\n"
-							+ "    \"@type\": \"ListItem\",\n"
-							+ "    \"position\": ");
-						jsonOut.write(Integer.toString(size - i));
-						jsonOut.write(",\n"
-							+ "    \"item\": {\n"
-							+ "      \"@id\": \"");
-						// Write US-ASCII always per https://www.w3.org/TR/microdata/#terminology
-						URIEncoder.encodeURI(
-							view.getCanonicalUrl(servletContext, request, response, item),
-							textInLdJsonEncoder,
-							jsonOut
-						);
-						jsonOut.write("\",\n"
-							+ "      \"name\": ");
-						// The parent used for shortTitle resolution, if any
-						PageRef parentPageRef;
-						if(i < (size - 1)) {
-							parentPageRef = list.get(i + 1).getPageRef();
-						} else {
-							// If there is one, and only one, parent that is applicable to the given view, use it as shortTitle context
-							Set<Page> applicableParents = HtmlRendererUtils.getApplicableParents(servletContext, request, response, view, item);
-							if(applicableParents.size() == 1) {
-								parentPageRef = applicableParents.iterator().next().getPageRef();
-							} else {
-								parentPageRef = null;
-							}
-						}
-						jsonOut.text(PageUtils.getShortTitle(parentPageRef, item));
-						jsonOut.write("\n"
-							+ "    }\n"
-							+ "  }");
-						if(i != 0) jsonOut.write(',');
-					}
-					jsonOut.write("]\n"
-						+ "}\n");
-					jsonOut.writeSuffix(false);
-				}
-			}
-		}
-	}
+  @Override
+  public void doComponent(
+    ServletContext servletContext,
+    HttpServletRequest request,
+    HttpServletResponse response,
+    DocumentEE document,
+    View view,
+    Page page,
+    ComponentPosition position
+  ) throws ServletException, IOException {
+    if (
+      view != null
+      && page != null
+      && position == ComponentPosition.HEAD_END
+    ) {
+      PageRef contentRoot = SemanticCMS.getInstance(servletContext).getRootBook().getContentRoot();
+      // Find each distinct list, these will be in reverse order as a consequence of the traversal
+      Set<List<Page>> distinctLists = new LinkedHashSet<>();
+      findDistinctListsRecursive(
+        firstListOnly,
+        servletContext,
+        request,
+        response,
+        view,
+        contentRoot,
+        distinctLists,
+        new ArrayList<>(),
+        page
+      );
+      EncodingContextEE encodingContext = new EncodingContextEE(servletContext, request, response);
+      // Hard to find it documented, but it seems that multiple breadcrumbs in JSON-LD are represented by multiple script blocks.
+      // Other attempts, such as putting multiple into an array, gave confused results (but not errors) in the google validation tool.
+      for (List<Page> list : distinctLists) {
+        // This JSON-LD is embedded in the XHTML page, use encoder
+        try (
+          @SuppressWarnings("deprecation")
+          LdJsonWriter jsonOut = new LdJsonWriter(
+            encodingContext,
+            MediaEncoder.getInstance(encodingContext, MediaType.LD_JSON, MediaType.XHTML),
+            document.unsafe()
+          )
+        ) {
+          jsonOut.writePrefix();
+          jsonOut.write("{\n"
+            + "  \"@context\": \"http://schema.org\",\n"
+            + "  \"@type\": \"BreadcrumbList\",\n"
+            + "  \"itemListElement\": [");
+          for (
+            int size = list.size(),
+              i = size-1;
+            i >= 0;
+            i--
+          ) {
+            Page item = list.get(i);
+            jsonOut.write("{\n"
+              + "    \"@type\": \"ListItem\",\n"
+              + "    \"position\": ");
+            jsonOut.write(Integer.toString(size - i));
+            jsonOut.write(",\n"
+              + "    \"item\": {\n"
+              + "      \"@id\": \"");
+            // Write US-ASCII always per https://www.w3.org/TR/microdata/#terminology
+            URIEncoder.encodeURI(
+              view.getCanonicalUrl(servletContext, request, response, item),
+              textInLdJsonEncoder,
+              jsonOut
+            );
+            jsonOut.write("\",\n"
+              + "      \"name\": ");
+            // The parent used for shortTitle resolution, if any
+            PageRef parentPageRef;
+            if (i < (size - 1)) {
+              parentPageRef = list.get(i + 1).getPageRef();
+            } else {
+              // If there is one, and only one, parent that is applicable to the given view, use it as shortTitle context
+              Set<Page> applicableParents = HtmlRendererUtils.getApplicableParents(servletContext, request, response, view, item);
+              if (applicableParents.size() == 1) {
+                parentPageRef = applicableParents.iterator().next().getPageRef();
+              } else {
+                parentPageRef = null;
+              }
+            }
+            jsonOut.text(PageUtils.getShortTitle(parentPageRef, item));
+            jsonOut.write("\n"
+              + "    }\n"
+              + "  }");
+            if (i != 0) {
+              jsonOut.write(',');
+            }
+          }
+          jsonOut.write("]\n"
+            + "}\n");
+          jsonOut.writeSuffix(false);
+        }
+      }
+    }
+  }
 
 
-	private static void findDistinctListsRecursive(
-		boolean firstListOnly,
-		ServletContext servletContext,
-		HttpServletRequest request,
-		HttpServletResponse response,
-		View view,
-		PageRef contentRoot,
-		Set<List<Page>> distinctLists,
-		List<Page> currentList,
-		Page currentPage
-	) throws ServletException, IOException {
-		// The contentRoot is never added to the list
-		boolean isContentRoot = currentPage.getPageRef().equals(contentRoot);
-		if(!isContentRoot) currentList.add(currentPage);
-		// Find all parents that are not in missing books and apply to the current view
-		Set<Page> applicableParents = HtmlRendererUtils.getApplicableParents(servletContext, request, response, view, currentPage);
-		if(!applicableParents.isEmpty()) {
-			// Recurse further, still not at leaf
-			for(Page parent : applicableParents) {
-				findDistinctListsRecursive(
-					firstListOnly,
-					servletContext,
-					request,
-					response,
-					view,
-					contentRoot,
-					distinctLists,
-					currentList,
-					parent
-				);
-				if(firstListOnly && !distinctLists.isEmpty()) break;
-			}
-		} else {
-			if(!currentList.isEmpty() && !distinctLists.contains(currentList)) {
-				// Add copy, since currentList will continue to be altered during traversal
-				distinctLists.add(new ArrayList<>(currentList));
-			}
-		}
-		if(!isContentRoot) currentList.remove(currentList.size() - 1);
-	}
+  private static void findDistinctListsRecursive(
+    boolean firstListOnly,
+    ServletContext servletContext,
+    HttpServletRequest request,
+    HttpServletResponse response,
+    View view,
+    PageRef contentRoot,
+    Set<List<Page>> distinctLists,
+    List<Page> currentList,
+    Page currentPage
+  ) throws ServletException, IOException {
+    // The contentRoot is never added to the list
+    boolean isContentRoot = currentPage.getPageRef().equals(contentRoot);
+    if (!isContentRoot) {
+      currentList.add(currentPage);
+    }
+    // Find all parents that are not in missing books and apply to the current view
+    Set<Page> applicableParents = HtmlRendererUtils.getApplicableParents(servletContext, request, response, view, currentPage);
+    if (!applicableParents.isEmpty()) {
+      // Recurse further, still not at leaf
+      for (Page parent : applicableParents) {
+        findDistinctListsRecursive(
+          firstListOnly,
+          servletContext,
+          request,
+          response,
+          view,
+          contentRoot,
+          distinctLists,
+          currentList,
+          parent
+        );
+        if (firstListOnly && !distinctLists.isEmpty()) {
+          break;
+        }
+      }
+    } else {
+      if (!currentList.isEmpty() && !distinctLists.contains(currentList)) {
+        // Add copy, since currentList will continue to be altered during traversal
+        distinctLists.add(new ArrayList<>(currentList));
+      }
+    }
+    if (!isContentRoot) {
+      currentList.remove(currentList.size() - 1);
+    }
+  }
 }
