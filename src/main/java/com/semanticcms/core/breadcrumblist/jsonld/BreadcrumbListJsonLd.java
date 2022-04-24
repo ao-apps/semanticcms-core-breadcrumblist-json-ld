@@ -146,6 +146,7 @@ public class BreadcrumbListJsonLd implements Component {
       boolean firstListOnly = !"false".equalsIgnoreCase(servletContext.getInitParameter(FIRST_LIST_ONLY_INIT_PARAM));
       SemanticCMS.getInstance(event.getServletContext()).addComponent(new BreadcrumbListJsonLd(firstListOnly));
     }
+
     @Override
     public void contextDestroyed(ServletContextEvent event) {
       // Do nothing
@@ -160,32 +161,32 @@ public class BreadcrumbListJsonLd implements Component {
 
   @Override
   public void doComponent(
-    ServletContext servletContext,
-    HttpServletRequest request,
-    HttpServletResponse response,
-    DocumentEE document,
-    View view,
-    Page page,
-    ComponentPosition position
+      ServletContext servletContext,
+      HttpServletRequest request,
+      HttpServletResponse response,
+      DocumentEE document,
+      View view,
+      Page page,
+      ComponentPosition position
   ) throws ServletException, IOException {
     if (
-      view != null
-      && page != null
-      && position == ComponentPosition.HEAD_END
+        view != null
+            && page != null
+            && position == ComponentPosition.HEAD_END
     ) {
       PageRef contentRoot = SemanticCMS.getInstance(servletContext).getRootBook().getContentRoot();
       // Find each distinct list, these will be in reverse order as a consequence of the traversal
       Set<List<Page>> distinctLists = new LinkedHashSet<>();
       findDistinctListsRecursive(
-        firstListOnly,
-        servletContext,
-        request,
-        response,
-        view,
-        contentRoot,
-        distinctLists,
-        new ArrayList<>(),
-        page
+          firstListOnly,
+          servletContext,
+          request,
+          response,
+          view,
+          contentRoot,
+          distinctLists,
+          new ArrayList<>(),
+          page
       );
       EncodingContextEE encodingContext = new EncodingContextEE(servletContext, request, response);
       // Hard to find it documented, but it seems that multiple breadcrumbs in JSON-LD are represented by multiple script blocks.
@@ -194,39 +195,39 @@ public class BreadcrumbListJsonLd implements Component {
         // This JSON-LD is embedded in the XHTML page, use encoder
         try (
           @SuppressWarnings("deprecation")
-          LdJsonWriter jsonOut = new LdJsonWriter(
-            encodingContext,
-            MediaEncoder.getInstance(encodingContext, MediaType.LD_JSON, MediaType.XHTML),
-            document.unsafe()
-          )
-        ) {
+            LdJsonWriter jsonOut = new LdJsonWriter(
+                encodingContext,
+                MediaEncoder.getInstance(encodingContext, MediaType.LD_JSON, MediaType.XHTML),
+                document.unsafe()
+            )
+            ) {
           jsonOut.writePrefix();
           jsonOut.write("{\n"
-            + "  \"@context\": \"http://schema.org\",\n"
-            + "  \"@type\": \"BreadcrumbList\",\n"
-            + "  \"itemListElement\": [");
+              + "  \"@context\": \"http://schema.org\",\n"
+              + "  \"@type\": \"BreadcrumbList\",\n"
+              + "  \"itemListElement\": [");
           for (
             int size = list.size(),
-              i = size-1;
+              i = size - 1;
             i >= 0;
             i--
           ) {
             Page item = list.get(i);
             jsonOut.write("{\n"
-              + "    \"@type\": \"ListItem\",\n"
-              + "    \"position\": ");
+                + "    \"@type\": \"ListItem\",\n"
+                + "    \"position\": ");
             jsonOut.write(Integer.toString(size - i));
             jsonOut.write(",\n"
-              + "    \"item\": {\n"
-              + "      \"@id\": \"");
+                + "    \"item\": {\n"
+                + "      \"@id\": \"");
             // Write US-ASCII always per https://www.w3.org/TR/microdata/#terminology
             URIEncoder.encodeURI(
-              view.getCanonicalUrl(servletContext, request, response, item),
-              textInLdJsonEncoder,
-              jsonOut
+                view.getCanonicalUrl(servletContext, request, response, item),
+                textInLdJsonEncoder,
+                jsonOut
             );
             jsonOut.write("\",\n"
-              + "      \"name\": ");
+                + "      \"name\": ");
             // The parent used for shortTitle resolution, if any
             PageRef parentPageRef;
             if (i < (size - 1)) {
@@ -242,14 +243,14 @@ public class BreadcrumbListJsonLd implements Component {
             }
             jsonOut.text(PageUtils.getShortTitle(parentPageRef, item));
             jsonOut.write("\n"
-              + "    }\n"
-              + "  }");
+                + "    }\n"
+                + "  }");
             if (i != 0) {
               jsonOut.write(',');
             }
           }
           jsonOut.write("]\n"
-            + "}\n");
+              + "}\n");
           jsonOut.writeSuffix(false);
         }
       }
@@ -258,15 +259,15 @@ public class BreadcrumbListJsonLd implements Component {
 
 
   private static void findDistinctListsRecursive(
-    boolean firstListOnly,
-    ServletContext servletContext,
-    HttpServletRequest request,
-    HttpServletResponse response,
-    View view,
-    PageRef contentRoot,
-    Set<List<Page>> distinctLists,
-    List<Page> currentList,
-    Page currentPage
+      boolean firstListOnly,
+      ServletContext servletContext,
+      HttpServletRequest request,
+      HttpServletResponse response,
+      View view,
+      PageRef contentRoot,
+      Set<List<Page>> distinctLists,
+      List<Page> currentList,
+      Page currentPage
   ) throws ServletException, IOException {
     // The contentRoot is never added to the list
     boolean isContentRoot = currentPage.getPageRef().equals(contentRoot);
@@ -279,15 +280,15 @@ public class BreadcrumbListJsonLd implements Component {
       // Recurse further, still not at leaf
       for (Page parent : applicableParents) {
         findDistinctListsRecursive(
-          firstListOnly,
-          servletContext,
-          request,
-          response,
-          view,
-          contentRoot,
-          distinctLists,
-          currentList,
-          parent
+            firstListOnly,
+            servletContext,
+            request,
+            response,
+            view,
+            contentRoot,
+            distinctLists,
+            currentList,
+            parent
         );
         if (firstListOnly && !distinctLists.isEmpty()) {
           break;
