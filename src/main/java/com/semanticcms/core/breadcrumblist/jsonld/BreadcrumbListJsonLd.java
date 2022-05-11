@@ -23,10 +23,11 @@
 
 package com.semanticcms.core.breadcrumblist.jsonld;
 
+import static com.aoapps.encoding.TextInJavaScriptEncoder.textInLdJsonEncoder;
+
 import com.aoapps.encoding.LdJsonWriter;
 import com.aoapps.encoding.MediaEncoder;
 import com.aoapps.encoding.MediaType;
-import static com.aoapps.encoding.TextInJavaScriptEncoder.textInLdJsonEncoder;
 import com.aoapps.encoding.servlet.EncodingContextEE;
 import com.aoapps.html.servlet.DocumentEE;
 import com.aoapps.net.URIEncoder;
@@ -139,6 +140,9 @@ public class BreadcrumbListJsonLd implements Component {
    */
   private static final String FIRST_LIST_ONLY_INIT_PARAM = BreadcrumbListJsonLd.class.getName() + ".firstListOnly";
 
+  /**
+   * Registers the {@link BreadcrumbListJsonLd} component in {@link HtmlRenderer}.
+   */
   @WebListener("Registers the BreadcrumbListJsonLd component in HtmlRenderer.")
   public static class Initializer implements ServletContextListener {
     @Override
@@ -196,7 +200,7 @@ public class BreadcrumbListJsonLd implements Component {
       for (List<Page> list : distinctLists) {
         // This JSON-LD is embedded in the XHTML page, use encoder
         try (
-          @SuppressWarnings("deprecation")
+            @SuppressWarnings("deprecation")
             LdJsonWriter jsonOut = new LdJsonWriter(
                 encodingContext,
                 MediaEncoder.getInstance(encodingContext, MediaType.LD_JSON, MediaType.XHTML),
@@ -208,13 +212,8 @@ public class BreadcrumbListJsonLd implements Component {
               + "  \"@context\": \"http://schema.org\",\n"
               + "  \"@type\": \"BreadcrumbList\",\n"
               + "  \"itemListElement\": [");
-          for (
-            int size = list.size(),
-              i = size - 1;
-            i >= 0;
-            i--
-          ) {
-            Page item = list.get(i);
+          for (int size = list.size(), i = size - 1; i >= 0; i--) {
+            final Page item = list.get(i);
             jsonOut.write("{\n"
                 + "    \"@type\": \"ListItem\",\n"
                 + "    \"position\": ");
