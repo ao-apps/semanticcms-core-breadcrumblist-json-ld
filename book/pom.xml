@@ -29,7 +29,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gn
     <relativePath>../../../parent/pom.xml</relativePath>
   </parent>
 
-  <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-breadcrumblist-json-ld-book</artifactId><version>1.4.1</version>
+  <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-breadcrumblist-json-ld-book</artifactId><version>1.4.1-POST-SNAPSHOT</version>
   <packaging>bundle</packaging>
 
   <properties>
@@ -76,7 +76,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gn
     <connection>scm:git:git://github.com/ao-apps/semanticcms-core-breadcrumblist-json-ld.git</connection>
     <developerConnection>scm:git:git@github.com:ao-apps/semanticcms-core-breadcrumblist-json-ld.git</developerConnection>
     <url>https://github.com/ao-apps/semanticcms-core-breadcrumblist-json-ld</url>
-    <tag>semanticcms-core-breadcrumblist-json-ld-book-1.4.1</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <issueManagement>
