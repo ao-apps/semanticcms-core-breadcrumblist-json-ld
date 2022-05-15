@@ -37,7 +37,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gn
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-30T16:32:29-05:00"
-    dateModified="2022-03-25T23:49:44-05:00"
+    dateModified="2022-05-14T20:30:10-05:00"
   >
     <c:if test="${fn:endsWith('@{project.version}', '-SNAPSHOT') and !fn:endsWith('@{project.version}', '-POST-SNAPSHOT')}">
       <changelog:release
@@ -47,12 +47,21 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gn
         artifactId="@{documented.artifactId}"
         repository="@{nexusUrl}content/repositories/snapshots/"
         scmUrl="@{project.scm.url}"
-      >
-        <ul>
-          <li>Added <code>EncodingContext.getCharacterEncoding()</code> to get output character encoding.</li>
-        </ul>
-      </changelog:release>
+      />
     </c:if>
+
+    <changelog:release
+      projectName="@{documented.name}"
+      version="1.4.1"
+      datePublished="2022-05-14T20:30:10-05:00"
+      groupId="@{project.groupId}"
+      artifactId="@{documented.artifactId}"
+      scmUrl="@{project.scm.url}"
+    >
+      <ul>
+        <li>Added <code>EncodingContext.getCharacterEncoding()</code> to get output character encoding.</li>
+      </ul>
+    </changelog:release>
 
     <changelog:release
       projectName="@{documented.name}"
