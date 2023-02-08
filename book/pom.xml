@@ -33,6 +33,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gn
   <packaging>bundle</packaging>
 
   <properties>
+    <project.build.outputTimestamp>2023-02-08T21:06:04Z</project.build.outputTimestamp>
     <module.name>com.semanticcms.core.breadcrumblist.jsonld.book</module.name>
     <!-- These values are copied from the project being documented -->
     <documented.artifactId>semanticcms-core-breadcrumblist-json-ld</documented.artifactId>
