@@ -23,7 +23,7 @@
 * [Project Home](https://semanticcms.com/core/breadcrumblist-json-ld/)
 * [Changelog](https://semanticcms.com/core/breadcrumblist-json-ld/changelog)
 * [API Docs](https://semanticcms.com/core/breadcrumblist-json-ld/apidocs/)
-* [Maven Central Repository](https://central.sonatype.com/search?namespace=com.semanticcms&q=a%3Asemanticcms-core-breadcrumblist-json-ld)
+* [Maven Central Repository](https://central.sonatype.com/artifact/com.semanticcms/semanticcms-core-breadcrumblist-json-ld)
 * [GitHub](https://github.com/ao-apps/semanticcms-core-breadcrumblist-json-ld)
 
 ## Contact Us
