@@ -30,6 +30,7 @@ def upstreamProjects = [
   // Direct
   '../../oss/encoding', // <groupId>com.aoapps</groupId><artifactId>ao-encoding</artifactId>
   '../../oss/fluent-html-servlet', // <groupId>com.aoapps</groupId><artifactId>ao-fluent-html-servlet</artifactId>
+  '../../oss/lang', // <groupId>com.aoapps</groupId><artifactId>ao-lang</artifactId>
   '../../oss/net-types', // <groupId>com.aoapps</groupId><artifactId>ao-net-types</artifactId>
   // No Jenkins: <groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId>
   'controller', // <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-controller</artifactId>
