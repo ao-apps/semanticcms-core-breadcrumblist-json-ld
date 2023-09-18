@@ -134,11 +134,17 @@ public class BreadcrumbListJsonLd implements Component {
    * ordering will select which of the possible breadcrumb lists is provided.
    * </p>
    * <p>
-   * This defaults to {@code true}, and will continue to do so until Google correctly
+   * This defaults to {@code false}, and will continue to do so until Google correctly
    * interprets multiple breadcrumb list entries.
    * </p>
    */
-  private static final String FIRST_LIST_ONLY_INIT_PARAM = BreadcrumbListJsonLd.class.getName() + ".firstListOnly";
+  private static final String ENABLE_MULTI_BREADCRUMB_INIT_PARAM = BreadcrumbListJsonLd.class.getName() + ".enableMultiBreadcrumb";
+
+  /**
+   * Minimum number of ListItem required in a BreadcrumbList.
+   * <a href="https://developers.google.com/search/docs/appearance/structured-data/breadcrumb#structured-data-type-definitions">"that contains at least two ListItems"</a>.
+   */
+  private static final int MIN_LIST_ITEMS = 2;
 
   /**
    * Registers the {@link BreadcrumbListJsonLd} component in {@link HtmlRenderer}.
@@ -148,9 +154,9 @@ public class BreadcrumbListJsonLd implements Component {
     @Override
     public void contextInitialized(ServletContextEvent event) {
       ServletContext servletContext = event.getServletContext();
-      // Defaults to true until Google is known to support multiple lists
-      boolean firstListOnly = !"false".equalsIgnoreCase(servletContext.getInitParameter(FIRST_LIST_ONLY_INIT_PARAM));
-      HtmlRenderer.getInstance(event.getServletContext()).addComponent(new BreadcrumbListJsonLd(firstListOnly));
+      // Defaults to false until Google is known to support multiple lists
+      boolean enableMultiBreadcrumb = "true".equalsIgnoreCase(servletContext.getInitParameter(ENABLE_MULTI_BREADCRUMB_INIT_PARAM));
+      HtmlRenderer.getInstance(event.getServletContext()).addComponent(new BreadcrumbListJsonLd(enableMultiBreadcrumb));
     }
 
     @Override
@@ -159,10 +165,10 @@ public class BreadcrumbListJsonLd implements Component {
     }
   }
 
-  private final boolean firstListOnly;
+  private final boolean enableMultiBreadcrumb;
 
-  private BreadcrumbListJsonLd(boolean firstListOnly) {
-    this.firstListOnly = firstListOnly;
+  private BreadcrumbListJsonLd(boolean enableMultiBreadcrumb) {
+    this.enableMultiBreadcrumb = enableMultiBreadcrumb;
   }
 
   @Override
@@ -184,7 +190,7 @@ public class BreadcrumbListJsonLd implements Component {
       // Find each distinct list, these will be in reverse order as a consequence of the traversal
       Set<List<Page>> distinctLists = new LinkedHashSet<>();
       findDistinctListsRecursive(
-          firstListOnly,
+          enableMultiBreadcrumb,
           servletContext,
           request,
           response,
@@ -194,29 +200,33 @@ public class BreadcrumbListJsonLd implements Component {
           new ArrayList<>(),
           page
       );
-      EncodingContextEE encodingContext = new EncodingContextEE(servletContext, request, response);
-      // Hard to find it documented, but it seems that multiple breadcrumbs in JSON-LD are represented by multiple script blocks.
-      // Other attempts, such as putting multiple into an array, gave confused results (but not errors) in the google validation tool.
-      for (List<Page> list : distinctLists) {
-        // https://developers.google.com/search/docs/appearance/structured-data/breadcrumb#structured-data-type-definitions:
-        // "that contains at least two ListItems"
-        int size = list.size();
-        if (size >= 2) {
-          // This JSON-LD is embedded in the XHTML page, use encoder
-          try (
-              @SuppressWarnings("deprecation")
-              LdJsonWriter jsonOut = new LdJsonWriter(
-                  encodingContext,
-                  MediaEncoder.getInstance(encodingContext, MediaType.LD_JSON, MediaType.XHTML),
-                  document.unsafe()
-              )
-              ) {
-            jsonOut.writePrefix();
+      if (!distinctLists.isEmpty()) {
+        EncodingContextEE encodingContext = new EncodingContextEE(servletContext, request, response);
+        // This JSON-LD is embedded in the XHTML page, use encoder
+        try (
+            @SuppressWarnings("deprecation")
+            LdJsonWriter jsonOut = new LdJsonWriter(
+                encodingContext,
+                MediaEncoder.getInstance(encodingContext, MediaType.LD_JSON, MediaType.XHTML),
+                document.unsafe()
+            )
+            ) {
+          jsonOut.writePrefix();
+          if (distinctLists.size() > 1) {
+            jsonOut.write('[');
+          }
+          boolean didOne = false;
+          for (List<Page> list : distinctLists) {
+            if (didOne) {
+              jsonOut.write(",\n");
+            } else {
+              didOne = true;
+            }
             jsonOut.write("{\n"
                 + "  \"@context\": \"https://schema.org\",\n"
                 + "  \"@type\": \"BreadcrumbList\",\n"
                 + "  \"itemListElement\": [");
-            for (int i = size - 1; i >= 0; i--) {
+            for (int size = list.size(), i = size - 1; i >= 0; i--) {
               final Page item = list.get(i);
               jsonOut.write("{\n"
                   + "    \"@type\": \"ListItem\",\n"
@@ -254,8 +264,11 @@ public class BreadcrumbListJsonLd implements Component {
             }
             jsonOut.write("]\n"
                 + "}\n");
-            jsonOut.writeSuffix(false);
           }
+          if (distinctLists.size() > 1) {
+            jsonOut.write(']');
+          }
+          jsonOut.writeSuffix(false);
         }
       }
     }
@@ -263,7 +276,7 @@ public class BreadcrumbListJsonLd implements Component {
 
 
   private static void findDistinctListsRecursive(
-      boolean firstListOnly,
+      boolean enableMultiBreadcrumb,
       ServletContext servletContext,
       HttpServletRequest request,
       HttpServletResponse response,
@@ -284,7 +297,7 @@ public class BreadcrumbListJsonLd implements Component {
       // Recurse further, still not at leaf
       for (Page parent : applicableParents) {
         findDistinctListsRecursive(
-            firstListOnly,
+            enableMultiBreadcrumb,
             servletContext,
             request,
             response,
@@ -294,12 +307,12 @@ public class BreadcrumbListJsonLd implements Component {
             currentList,
             parent
         );
-        if (firstListOnly && !distinctLists.isEmpty()) {
+        if (!enableMultiBreadcrumb && !distinctLists.isEmpty()) {
           break;
         }
       }
     } else {
-      if (!currentList.isEmpty() && !distinctLists.contains(currentList)) {
+      if (currentList.size() >= MIN_LIST_ITEMS && !distinctLists.contains(currentList)) {
         // Add copy, since currentList will continue to be altered during traversal
         distinctLists.add(new ArrayList<>(currentList));
       }
