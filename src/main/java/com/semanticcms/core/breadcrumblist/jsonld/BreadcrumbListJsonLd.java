@@ -1,6 +1,6 @@
 /*
  * semanticcms-core-breadcrumblist-json-ld - BreadcrumbList for SemanticCMS in JSON-LD format.
- * Copyright (C) 2016, 2017, 2019, 2020, 2021, 2022  AO Industries, Inc.
+ * Copyright (C) 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -209,7 +209,7 @@ public class BreadcrumbListJsonLd implements Component {
             ) {
           jsonOut.writePrefix();
           jsonOut.write("{\n"
-              + "  \"@context\": \"http://schema.org\",\n"
+              + "  \"@context\": \"https://schema.org\",\n"
               + "  \"@type\": \"BreadcrumbList\",\n"
               + "  \"itemListElement\": [");
           for (int size = list.size(), i = size - 1; i >= 0; i--) {
