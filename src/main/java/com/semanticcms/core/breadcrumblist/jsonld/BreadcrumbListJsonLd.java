@@ -118,7 +118,7 @@ import javax.servlet.http.HttpServletResponse;
  * </p>
  * See also:
  * <ul>
- *   <li><a href="https://developers.google.com/search/docs/data-types/breadcrumbs">Google Search - Breadcrumbs</a></li>
+ *   <li><a href="https://developers.google.com/search/docs/appearance/structured-data/breadcrumb#json-ld">Google Search - Breadcrumbs</a></li>
  *   <li><a href="https://search.google.com/structured-data/testing-tool">Google Structure Data Testing Tool</a></li>
  *   <li><a href="https://audisto.com/insights/guides/2/">Breadcrumb Navigation Guide - Usability &amp; SEOM</a></li>
  *   <li><a href="https://webmaster.yandex.com/tools/microtest/">Yandex validator</a></li>
@@ -219,16 +219,7 @@ public class BreadcrumbListJsonLd implements Component {
                 + "    \"position\": ");
             jsonOut.write(Integer.toString(size - i));
             jsonOut.write(",\n"
-                + "    \"item\": {\n"
-                + "      \"@id\": \"");
-            // Write US-ASCII always per https://www.w3.org/TR/microdata/#terminology
-            URIEncoder.encodeURI(
-                view.getCanonicalUrl(servletContext, request, response, item),
-                textInLdJsonEncoder,
-                jsonOut
-            );
-            jsonOut.write("\",\n"
-                + "      \"name\": ");
+                + "    \"name\": ");
             // The parent used for shortTitle resolution, if any
             PageRef parentPageRef;
             if (i < (size - 1)) {
@@ -243,8 +234,15 @@ public class BreadcrumbListJsonLd implements Component {
               }
             }
             jsonOut.text(PageUtils.getShortTitle(parentPageRef, item));
-            jsonOut.write("\n"
-                + "    }\n"
+            jsonOut.write(",\n"
+                + "    \"item\": \"");
+            // Write US-ASCII always per https://www.w3.org/TR/microdata/#terminology
+            URIEncoder.encodeURI(
+                view.getCanonicalUrl(servletContext, request, response, item),
+                textInLdJsonEncoder,
+                jsonOut
+            );
+            jsonOut.write("\"\n"
                 + "  }");
             if (i != 0) {
               jsonOut.write(',');
