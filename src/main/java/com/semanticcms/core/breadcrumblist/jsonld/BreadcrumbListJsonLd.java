@@ -263,11 +263,12 @@ public class BreadcrumbListJsonLd implements Component {
               }
             }
             jsonOut.write("]\n"
-                + "}\n");
+                + "}");
           }
           if (distinctLists.size() > 1) {
             jsonOut.write(']');
           }
+          jsonOut.write('\n');
           jsonOut.writeSuffix(false);
         }
       }
