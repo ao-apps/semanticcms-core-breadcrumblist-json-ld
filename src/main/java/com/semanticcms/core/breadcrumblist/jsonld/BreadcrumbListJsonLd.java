@@ -217,17 +217,8 @@ public class BreadcrumbListJsonLd implements Component {
                   + "    \"@type\": \"ListItem\",\n"
                   + "    \"position\": ");
               jsonOut.write(Integer.toString(size - i));
-              jsonOut.write(",\n"
-                  + "    \"item\": {\n"
-                  + "      \"@id\": \"");
-              // Write US-ASCII always per https://www.w3.org/TR/microdata/#terminology
-              URIEncoder.encodeURI(
-                  view.getCanonicalUrl(servletContext, request, response, item),
-                  textInLdJsonEncoder,
-                  jsonOut
-              );
-              jsonOut.write("\",\n"
-                  + "      \"name\": ");
+              jsonOut.write(",\n");
+              String title = item.getTitle();
               // The parent used for shortTitle resolution, if any
               PageRef parentPageRef;
               if (i < (size - 1)) {
@@ -241,7 +232,24 @@ public class BreadcrumbListJsonLd implements Component {
                   parentPageRef = null;
                 }
               }
-              jsonOut.text(PageUtils.getShortTitle(parentPageRef, item));
+              String shortTitle = PageUtils.getShortTitle(parentPageRef, item);
+              // ListItem.name is based on parent-relative shortTitle, only added when different than the page title
+              if (!title.equals(shortTitle)) {
+                jsonOut.write("    \"name\": ");
+                jsonOut.text(shortTitle);
+                jsonOut.write(",\n");
+              }
+              jsonOut.write("    \"item\": {\n"
+                  + "      \"@id\": \"");
+              // Write US-ASCII always per https://www.w3.org/TR/microdata/#terminology
+              URIEncoder.encodeURI(
+                  view.getCanonicalUrl(servletContext, request, response, item),
+                  textInLdJsonEncoder,
+                  jsonOut
+              );
+              jsonOut.write("\",\n"
+                  + "      \"name\": ");
+              jsonOut.text(title);
               jsonOut.write("\n"
                   + "    }\n"
                   + "  }");
