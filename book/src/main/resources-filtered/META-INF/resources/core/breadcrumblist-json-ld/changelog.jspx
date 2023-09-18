@@ -37,7 +37,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gn
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-30T16:32:29-05:00"
-    dateModified="2023-09-18T19:08:04Z"
+    dateModified="2023-09-18T19:14:25Z"
   >
     <c:set var="latestRelease" value="1.4.1" />
     <c:if test="${
@@ -61,8 +61,10 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gn
           <li>
             Re-implemented multiple breadcrumb lists as array, instead of separate scripts, as documented at
             <ao:a href="https://developers.google.com/search/docs/appearance/structured-data/breadcrumb#html_example">Multiple breadcrumb trail</ao:a>.
-            This feature remains off by default, pending testing, and may be enabled with a
-            <code>com.semanticcms.core.breadcrumblist.jsonld.BreadcrumbListJsonLd.enableMultiBreadcrumb=true</code> web
+          </li>
+          <li>
+            Multiple breadcrumb lists (as array) are now enabled by default.  May be disabled with a
+            <code>com.semanticcms.core.breadcrumblist.jsonld.BreadcrumbListJsonLd.enableMultiBreadcrumb=false</code> web
             application init parameter.
           </li>
         </ul>
