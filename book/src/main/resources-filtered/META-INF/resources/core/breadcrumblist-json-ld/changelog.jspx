@@ -37,7 +37,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gn
     shortTitle="Changelog"
     tocLevels="1"
     datePublished="2016-10-30T16:32:29-05:00"
-    dateModified="2022-05-14T20:30:10-05:00"
+    dateModified="2023-09-18T10:35:28Z"
   >
     <c:set var="latestRelease" value="1.4.1" />
     <c:if test="${
@@ -52,7 +52,11 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gn
         artifactId="@{documented.artifactId}"
         repository="@{nexusUrl}content/repositories/snapshots/"
         scmUrl="@{project.scm.url}"
-      />
+      >
+        <ul>
+          <li>Updated to <ao:a href="https://developers.google.com/search/docs/appearance/structured-data/breadcrumb#json-ld">simpler JSON-LD structure</ao:a>.</li>
+        </ul>
+      </changelog:release>
     </c:if>
 
     <changelog:release
