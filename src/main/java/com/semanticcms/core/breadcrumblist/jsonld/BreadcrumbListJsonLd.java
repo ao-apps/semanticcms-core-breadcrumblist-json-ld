@@ -231,7 +231,16 @@ public class BreadcrumbListJsonLd implements Component {
                   + "    \"position\": ");
               jsonOut.write(Integer.toString(size - i));
               jsonOut.write(",\n"
-                  + "    \"name\": ");
+                  + "    \"item\": {\n"
+                  + "      \"@id\": \"");
+              // Write US-ASCII always per https://www.w3.org/TR/microdata/#terminology
+              URIEncoder.encodeURI(
+                  view.getCanonicalUrl(servletContext, request, response, item),
+                  textInLdJsonEncoder,
+                  jsonOut
+              );
+              jsonOut.write("\",\n"
+                  + "      \"name\": ");
               // The parent used for shortTitle resolution, if any
               PageRef parentPageRef;
               if (i < (size - 1)) {
@@ -246,15 +255,8 @@ public class BreadcrumbListJsonLd implements Component {
                 }
               }
               jsonOut.text(PageUtils.getShortTitle(parentPageRef, item));
-              jsonOut.write(",\n"
-                  + "    \"item\": \"");
-              // Write US-ASCII always per https://www.w3.org/TR/microdata/#terminology
-              URIEncoder.encodeURI(
-                  view.getCanonicalUrl(servletContext, request, response, item),
-                  textInLdJsonEncoder,
-                  jsonOut
-              );
-              jsonOut.write("\"\n"
+              jsonOut.write("\n"
+                  + "    }\n"
                   + "  }");
               if (i != 0) {
                 jsonOut.write(',');
