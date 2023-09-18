@@ -111,11 +111,6 @@ import javax.servlet.http.HttpServletResponse;
  * The URLs within BreadcrumbLists are not rewritten by the current site export.  A more advanced export
  * in the future may allow for this.
  * </p>
- * <p>
- * Note: The Google documentation currently states that images are required.  This is confirmed to
- * be a mistake in their documentation that they will fix.  This release does not provide images to
- * the BreadcrumbList.
- * </p>
  * See also:
  * <ul>
  *   <li><a href="https://developers.google.com/search/docs/appearance/structured-data/breadcrumb#json-ld">Google Search - Breadcrumbs</a></li>
@@ -127,16 +122,8 @@ import javax.servlet.http.HttpServletResponse;
 public class BreadcrumbListJsonLd implements Component {
 
   /**
-   * Google search results seem confused by multiple <code><a href="https://schema.org/BreadcrumbList">BreadcrumbList</a></code>.
-   * <p>
-   * This is still true as of 2019-04-18.  Setting this to {@code true} will only
-   * provide the first of the breadcrumb lists.  Thus the page parent/child relationship
-   * ordering will select which of the possible breadcrumb lists is provided.
-   * </p>
-   * <p>
-   * This defaults to {@code false}, and will continue to do so until Google correctly
-   * interprets multiple breadcrumb list entries.
-   * </p>
+   * Enables multiple <code><a href="https://schema.org/BreadcrumbList">BreadcrumbList</a></code>, defaults to
+   * {@code true}.
    */
   private static final String ENABLE_MULTI_BREADCRUMB_INIT_PARAM = BreadcrumbListJsonLd.class.getName() + ".enableMultiBreadcrumb";
 
@@ -154,8 +141,8 @@ public class BreadcrumbListJsonLd implements Component {
     @Override
     public void contextInitialized(ServletContextEvent event) {
       ServletContext servletContext = event.getServletContext();
-      // Defaults to false until Google is known to support multiple lists
-      boolean enableMultiBreadcrumb = "true".equalsIgnoreCase(servletContext.getInitParameter(ENABLE_MULTI_BREADCRUMB_INIT_PARAM));
+      // Defaults to true
+      boolean enableMultiBreadcrumb = !"false".equalsIgnoreCase(servletContext.getInitParameter(ENABLE_MULTI_BREADCRUMB_INIT_PARAM));
       HtmlRenderer.getInstance(event.getServletContext()).addComponent(new BreadcrumbListJsonLd(enableMultiBreadcrumb));
     }
 
