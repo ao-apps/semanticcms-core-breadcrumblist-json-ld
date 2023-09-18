@@ -196,59 +196,64 @@ public class BreadcrumbListJsonLd implements Component {
       // Hard to find it documented, but it seems that multiple breadcrumbs in JSON-LD are represented by multiple script blocks.
       // Other attempts, such as putting multiple into an array, gave confused results (but not errors) in the google validation tool.
       for (List<Page> list : distinctLists) {
-        // This JSON-LD is embedded in the XHTML page, use encoder
-        try (
-            @SuppressWarnings("deprecation")
-            LdJsonWriter jsonOut = new LdJsonWriter(
-                encodingContext,
-                MediaEncoder.getInstance(encodingContext, MediaType.LD_JSON, MediaType.XHTML),
-                document.unsafe()
-            )
-            ) {
-          jsonOut.writePrefix();
-          jsonOut.write("{\n"
-              + "  \"@context\": \"https://schema.org\",\n"
-              + "  \"@type\": \"BreadcrumbList\",\n"
-              + "  \"itemListElement\": [");
-          for (int size = list.size(), i = size - 1; i >= 0; i--) {
-            final Page item = list.get(i);
+        // https://developers.google.com/search/docs/appearance/structured-data/breadcrumb#structured-data-type-definitions:
+        // "that contains at least two ListItems"
+        int size = list.size();
+        if (size >= 2) {
+          // This JSON-LD is embedded in the XHTML page, use encoder
+          try (
+              @SuppressWarnings("deprecation")
+              LdJsonWriter jsonOut = new LdJsonWriter(
+                  encodingContext,
+                  MediaEncoder.getInstance(encodingContext, MediaType.LD_JSON, MediaType.XHTML),
+                  document.unsafe()
+              )
+              ) {
+            jsonOut.writePrefix();
             jsonOut.write("{\n"
-                + "    \"@type\": \"ListItem\",\n"
-                + "    \"position\": ");
-            jsonOut.write(Integer.toString(size - i));
-            jsonOut.write(",\n"
-                + "    \"name\": ");
-            // The parent used for shortTitle resolution, if any
-            PageRef parentPageRef;
-            if (i < (size - 1)) {
-              parentPageRef = list.get(i + 1).getPageRef();
-            } else {
-              // If there is one, and only one, parent that is applicable to the given view, use it as shortTitle context
-              Set<Page> applicableParents = PageUtils.getApplicableParents(servletContext, request, response, view, item);
-              if (applicableParents.size() == 1) {
-                parentPageRef = applicableParents.iterator().next().getPageRef();
+                + "  \"@context\": \"https://schema.org\",\n"
+                + "  \"@type\": \"BreadcrumbList\",\n"
+                + "  \"itemListElement\": [");
+            for (int i = size - 1; i >= 0; i--) {
+              final Page item = list.get(i);
+              jsonOut.write("{\n"
+                  + "    \"@type\": \"ListItem\",\n"
+                  + "    \"position\": ");
+              jsonOut.write(Integer.toString(size - i));
+              jsonOut.write(",\n"
+                  + "    \"name\": ");
+              // The parent used for shortTitle resolution, if any
+              PageRef parentPageRef;
+              if (i < (size - 1)) {
+                parentPageRef = list.get(i + 1).getPageRef();
               } else {
-                parentPageRef = null;
+                // If there is one, and only one, parent that is applicable to the given view, use it as shortTitle context
+                Set<Page> applicableParents = PageUtils.getApplicableParents(servletContext, request, response, view, item);
+                if (applicableParents.size() == 1) {
+                  parentPageRef = applicableParents.iterator().next().getPageRef();
+                } else {
+                  parentPageRef = null;
+                }
+              }
+              jsonOut.text(PageUtils.getShortTitle(parentPageRef, item));
+              jsonOut.write(",\n"
+                  + "    \"item\": \"");
+              // Write US-ASCII always per https://www.w3.org/TR/microdata/#terminology
+              URIEncoder.encodeURI(
+                  view.getCanonicalUrl(servletContext, request, response, item),
+                  textInLdJsonEncoder,
+                  jsonOut
+              );
+              jsonOut.write("\"\n"
+                  + "  }");
+              if (i != 0) {
+                jsonOut.write(',');
               }
             }
-            jsonOut.text(PageUtils.getShortTitle(parentPageRef, item));
-            jsonOut.write(",\n"
-                + "    \"item\": \"");
-            // Write US-ASCII always per https://www.w3.org/TR/microdata/#terminology
-            URIEncoder.encodeURI(
-                view.getCanonicalUrl(servletContext, request, response, item),
-                textInLdJsonEncoder,
-                jsonOut
-            );
-            jsonOut.write("\"\n"
-                + "  }");
-            if (i != 0) {
-              jsonOut.write(',');
-            }
+            jsonOut.write("]\n"
+                + "}\n");
+            jsonOut.writeSuffix(false);
           }
-          jsonOut.write("]\n"
-              + "}\n");
-          jsonOut.writeSuffix(false);
         }
       }
     }
