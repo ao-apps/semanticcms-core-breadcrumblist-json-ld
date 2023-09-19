@@ -129,9 +129,19 @@ public class BreadcrumbListJsonLd implements Component {
 
   /**
    * Minimum number of ListItem required in a BreadcrumbList.
-   * <a href="https://developers.google.com/search/docs/appearance/structured-data/breadcrumb#structured-data-type-definitions">"that contains at least two ListItems"</a>.
+   * <p>
+   * <a href="https://developers.google.com/search/docs/appearance/structured-data/breadcrumb#structured-data-type-definitions">Google Search - Breadcrumbs</a>
+   * states "that contains at least two ListItems".  However, Google Search Console is showing one-item breadcrumb lists
+   * as valid.  In fact, these are the only ones currently showing under "Breadcrumbs" on one of our smaller sites.
+   * On this same site, however, we can see that breadcrumbs are still in the index by inspecting the URL.
+   * Perhaps single-item breadcrumbs are still meaningful because we do not include the home page as an entry?
+   * </p>
+   * <p>
+   * We have reactivated single-item breadcrumbs, since their presence may inform search engines about the short title
+   * of the page.
+   * </p>
    */
-  private static final int MIN_LIST_ITEMS = 2;
+  private static final int MIN_LIST_ITEMS = 1;
 
   /**
    * Registers the {@link BreadcrumbListJsonLd} component in {@link HtmlRenderer}.
