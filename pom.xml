@@ -39,6 +39,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gn
     <javadoc.breadcrumbs><![CDATA[<a target="${javadoc.target}" href="https://semanticcms.com/">SemanticCMS</a>
 / <a target="${javadoc.target}" href="https://semanticcms.com/core/">Core</a>
 / <a target="${javadoc.target}" href="${project.url}">BreadcrumbList JSON-LD</a>]]></javadoc.breadcrumbs>
+    
     <description.html><![CDATA[<a target="${javadoc.target}" href="https://schema.org/BreadcrumbList">BreadcrumbList</a> for <a target="${javadoc.target}" href="https://semanticcms.com/">SemanticCMS</a> in <a target="${javadoc.target}" href="http://json-ld.org/">JSON-LD</a> format.]]></description.html>
     <!-- TODO: Implement tests -->
     <sonar.coverage.exclusions>**.*</sonar.coverage.exclusions>

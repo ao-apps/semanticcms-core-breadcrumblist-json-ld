@@ -41,6 +41,9 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gn
     <documented.artifactId>semanticcms-core-breadcrumblist-json-ld</documented.artifactId>
     <documented.name>SemanticCMS Core BreadcrumbList JSON-LD</documented.name>
     <documented.description>BreadcrumbList for SemanticCMS in JSON-LD format.</documented.description>
+    <javadoc.breadcrumbs><![CDATA[<a target="${javadoc.target}" href="https://semanticcms.com/">SemanticCMS</a>
+/ <a target="${javadoc.target}" href="https://semanticcms.com/core/">Core</a>
+/ <a target="${javadoc.target}" href="${project.url}">BreadcrumbList JSON-LD</a>]]></javadoc.breadcrumbs>
 
     <description.html><![CDATA[Documentation for <a target="${javadoc.target}" href="${project.url}">${documented.name}</a> in <a target="${javadoc.target}" href="https://semanticcms.com/">SemanticCMS</a> format.]]></description.html>
     <!-- SonarQube -->
