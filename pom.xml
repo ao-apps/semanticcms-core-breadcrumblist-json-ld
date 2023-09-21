@@ -120,7 +120,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gn
             <groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId>
             <executions>
               <execution>
-                <id>unpack.offlineLinks</id><phase>prepare-package</phase><goals><goal>unpack</goal></goals>
+                <id>unpack.offlineLinks</id><phase>${unpack.offlineLinks.phase}</phase><goals><goal>unpack</goal></goals>
                 <configuration>
                   <artifactItems>
                     <!-- Direct -->
