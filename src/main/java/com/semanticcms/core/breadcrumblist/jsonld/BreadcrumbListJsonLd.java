@@ -1,6 +1,6 @@
 /*
  * semanticcms-core-breadcrumblist-json-ld - BreadcrumbList for SemanticCMS in JSON-LD format.
- * Copyright (C) 2016, 2017, 2019, 2020, 2021, 2022, 2023  AO Industries, Inc.
+ * Copyright (C) 2016, 2017, 2019, 2020, 2021, 2022, 2023, 2024  AO Industries, Inc.
  *     support@aoindustries.com
  *     7262 Bull Pen Cir
  *     Mobile, AL 36695
@@ -56,62 +56,50 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <p>
  * Adds a BreadcrumbsList in JSON-LD format script just before head end.
  * This is not a visual element for the user to navigate by, but is only
  * the script in JSON-LD.
- * </p>
- * <p>
- * This is applied to all {@link View views} and all {@link Page pages}, even those that are "noindex".
- * </p>
- * <p>
- * All links within the BreadcrumbList are within the current view and keep the view setting.
+ *
+ * <p>This is applied to all {@link View views} and all {@link Page pages}, even those that are "noindex".</p>
+ *
+ * <p>All links within the BreadcrumbList are within the current view and keep the view setting.
  * Thus, different views might have different BreadcrumbLists depending on the applicability
- * of a view to the parent pages.
- * </p>
- * <p>
- * Generates one BreadcrumbList for each unique path through parent pages.
+ * of a view to the parent pages.</p>
+ *
+ * <p>Generates one BreadcrumbList for each unique path through parent pages.
  * This is done with a depth-first search through the parents DAG, with each leaf
- * node constituting a starting point for a BreadcrumbList.
- * </p>
- * <p>
- * Parents in missing books are skipped.
- * </p>
- * <p>
- * All parents are verified as applicable to the given view.
+ * node constituting a starting point for a BreadcrumbList.</p>
+ *
+ * <p>Parents in missing books are skipped.</p>
+ *
+ * <p>All parents are verified as applicable to the given view.
  * The search stops when there are no parents applicable to the given view.
- * The parent's parents will not be checked in this case.
- * </p>
- * <p>
- * Parents are always handled in-order, so the ordering of the resulting BreadcrumbList is
- * determined by the ordering the parents are declared.
- * </p>
- * <p>
- * When the first item of the BreadcrumbList is the site's root ({@link Book#getContentRoot() contentRoot}
+ * The parent's parents will not be checked in this case.</p>
+ *
+ * <p>Parents are always handled in-order, so the ordering of the resulting BreadcrumbList is
+ * determined by the ordering the parents are declared.</p>
+ *
+ * <p>When the first item of the BreadcrumbList is the site's root ({@link Book#getContentRoot() contentRoot}
  * of the {@link SemanticCMS#getRootBook() rootBook}), which will typically be the case, the root
- * is excluded from the list.
- * </p>
- * <p>
- * With the above constraints, should two paths be found to be duplicates, only the first is added.
- * </p>
- * <p>
- * The current page is always included in the BreadcrumbList, unless it is the contentRoot itself.
- * </p>
- * <p>
- * {@link ParentRef#getShortTitle() shortTitle} is used for each list entry, with the parent
+ * is excluded from the list.</p>
+ *
+ * <p>With the above constraints, should two paths be found to be duplicates, only the first is added.</p>
+ *
+ * <p>The current page is always included in the BreadcrumbList, unless it is the contentRoot itself.</p>
+ *
+ * <p>{@link ParentRef#getShortTitle() shortTitle} is used for each list entry, with the parent
  * in the list as the shortTitle context.  This was the original motivation for making shortTitle
  * be configurable on a per-parent basis.  When the site root is excluded from the BreadcrumbList,
  * it is still used as the parent context for shortTitle.
- * See {@link PageUtils#getShortTitle(com.semanticcms.core.model.PageRef, com.semanticcms.core.model.Page)} for details.
- * </p>
- * <p>
- * The URLs contained within breadcrumbLists are generated as absolute URLs, similar to how the sitemaps are generated.
- * </p>
- * <p>
- * The URLs within BreadcrumbLists are not rewritten by the current site export.  A more advanced export
- * in the future may allow for this.
- * </p>
- * See also:
+ * See {@link PageUtils#getShortTitle(com.semanticcms.core.model.PageRef, com.semanticcms.core.model.Page)} for details.</p>
+ *
+ * <p>The URLs contained within breadcrumbLists are generated as absolute URLs, similar to how the sitemaps are generated.</p>
+ *
+ * <p>The URLs within BreadcrumbLists are not rewritten by the current site export.  A more advanced export
+ * in the future may allow for this.</p>
+ *
+ * <p>See also:</p>
+ *
  * <ul>
  *   <li><a href="https://developers.google.com/search/docs/appearance/structured-data/breadcrumb#json-ld">Google Search - Breadcrumbs</a></li>
  *   <li><a href="https://search.google.com/structured-data/testing-tool">Google Structure Data Testing Tool</a></li>
@@ -129,17 +117,15 @@ public class BreadcrumbListJsonLd implements Component {
 
   /**
    * Minimum number of ListItem required in a BreadcrumbList.
-   * <p>
-   * <a href="https://developers.google.com/search/docs/appearance/structured-data/breadcrumb#structured-data-type-definitions">Google Search - Breadcrumbs</a>
+   *
+   * <p><a href="https://developers.google.com/search/docs/appearance/structured-data/breadcrumb#structured-data-type-definitions">Google Search - Breadcrumbs</a>
    * states "that contains at least two ListItems".  However, Google Search Console is showing one-item breadcrumb lists
    * as valid.  In fact, these are the only ones currently showing under "Breadcrumbs" on one of our smaller sites.
    * On this same site, however, we can see that breadcrumbs are still in the index by inspecting the URL.
-   * Perhaps single-item breadcrumbs are still meaningful because we do not include the home page as an entry?
-   * </p>
-   * <p>
-   * We have reactivated single-item breadcrumbs, since their presence may inform search engines about the short title
-   * of the page.
-   * </p>
+   * Perhaps single-item breadcrumbs are still meaningful because we do not include the home page as an entry?</p>
+   *
+   * <p>We have reactivated single-item breadcrumbs, since their presence may inform search engines about the short title
+   * of the page.</p>
    */
   private static final int MIN_LIST_ITEMS = 1;
 
