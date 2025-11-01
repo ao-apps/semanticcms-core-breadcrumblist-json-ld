@@ -266,7 +266,6 @@ public class BreadcrumbListJsonLd implements Component {
     }
   }
 
-
   private static void findDistinctListsRecursive(
       boolean enableMultiBreadcrumb,
       ServletContext servletContext,
