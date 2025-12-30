@@ -347,9 +347,6 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gn
       </dependency>
       <!-- javaee-web-api-bom: <groupId>javax.el</groupId><artifactId>javax.el-api</artifactId> -->
       <!-- javaee-web-api-bom: <groupId>javax.servlet.jsp</groupId><artifactId>javax.servlet.jsp-api</artifactId> -->
-      <dependency>
-        <groupId>joda-time</groupId><artifactId>joda-time</artifactId><version>2.14.0</version>
-      </dependency>
       <!-- Imports -->
       <dependency>
         <groupId>com.aoapps</groupId><artifactId>javaee-web-api-bom</artifactId><version>7.0.1-POST-SNAPSHOT</version>
