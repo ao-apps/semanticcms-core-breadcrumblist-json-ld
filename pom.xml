@@ -111,20 +111,6 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gn
     </repository>
   </repositories>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-dependency-plugin</artifactId>
-        <configuration>
-          <ignoredDependencies>
-            <!-- No "module-info.java" in some release builds -->
-            <dependency>com.aoapps:ao-collections</dependency>
-          </ignoredDependencies>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-
   <profiles>
     <profile>
       <id>offlineLinks</id><activation><file><exists>src/main/java</exists></file></activation>
