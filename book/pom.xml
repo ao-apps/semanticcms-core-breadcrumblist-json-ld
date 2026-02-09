@@ -29,12 +29,12 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gn
     <relativePath>../../../parent/pom.xml</relativePath>
   </parent>
 
-  <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-breadcrumblist-json-ld-book</artifactId><version>2.0.1-SNAPSHOT</version>
+  <groupId>com.semanticcms</groupId><artifactId>semanticcms-core-breadcrumblist-json-ld-book</artifactId><version>2.0.1</version>
   <packaging>jar</packaging>
 
   <properties>
     <!-- Must be set to ${git.commit.time} for snapshots or ISO 8601 timestamp for releases. -->
-    <project.build.outputTimestamp>${git.commit.time}</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2026-02-09T21:03:27Z</project.build.outputTimestamp>
     <module.name>com.semanticcms.core.breadcrumblist.jsonld.book</module.name>
     <subproject.subpath>book/</subproject.subpath>
     <!-- These values are copied from the project being documented -->
@@ -82,7 +82,7 @@ along with semanticcms-core-breadcrumblist-json-ld.  If not, see <https://www.gn
     <connection>scm:git:git://github.com/ao-apps/semanticcms-core-breadcrumblist-json-ld.git</connection>
     <developerConnection>scm:git:git@github.com:ao-apps/semanticcms-core-breadcrumblist-json-ld.git</developerConnection>
     <url>https://github.com/ao-apps/semanticcms-core-breadcrumblist-json-ld</url>
-    <tag>HEAD</tag>
+    <tag>semanticcms-core-breadcrumblist-json-ld-book-2.0.1</tag>
   </scm>
 
   <issueManagement>
